@@ -17,24 +17,25 @@
 <script>
 import { minify, version } from 'csso';
 
+import minifierMixin from '@/helpers/minifierMixin.js';
+
 export default {
   name: 'MinCsso',
-  props: {
-    input: {
-      type: String,
-      default: ''
-    }
-  },
+  mixins: [minifierMixin],
   constants: {
     version
   },
-  computed: {
-    output: function () {
-      const options = {
-        restructure: true,
-        sourceMap: false
-      };
-      return minify(this.input, options).css;
+  methods: {
+    minify: function () {
+      try {
+        const options = {
+          restructure: true,
+          sourceMap: false
+        };
+        this.output = minify(this.input, options).css;
+      } catch {
+        /**/
+      }
     }
   }
 };

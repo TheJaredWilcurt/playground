@@ -15,7 +15,7 @@
         </svg>
       </a>
     </td>
-    <td class="min-version-td">v{{ version }}</td>
+    <td>v{{ version }}</td>
     <td><pre><code v-text="output"></code></pre></td>
   </tr>
 </template>
@@ -23,6 +23,8 @@
 <script>
 import CleanCSS from 'clean-css';
 import { version } from 'clean-css/package.json' with { type: 'json' };
+
+import minifierMixin from '@/helpers/minifierMixin.js';
 
 const cleanCss = new CleanCSS({
   inline: false, // don't inline @imports
@@ -32,19 +34,18 @@ const cleanCss = new CleanCSS({
 
 export default {
   name: 'MinCleancss',
-  props: {
-    input: {
-      type: String,
-      default: ''
-    }
-  },
+  mixins: [minifierMixin],
   constants: {
     version
   },
-  computed: {
-    output: function () {
-      const minified = cleanCss.minify(this.input);
-      return minified.styles;
+  methods: {
+    minify: function () {
+      try {
+        const minified = cleanCss.minify(this.input);
+        this.output = minified.styles;
+      } catch {
+        /**/
+      }
     }
   }
 };

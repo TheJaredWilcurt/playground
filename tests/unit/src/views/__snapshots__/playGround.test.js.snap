@@ -17,7 +17,7 @@ exports[`PlayGround > Mounts and renders 1`] = `
       ></textarea>
     </div>
   </form>
-  <table>
+  <table class="playground-table">
     <thead>
       <tr>
         <th>
@@ -34,10 +34,39 @@ exports[`PlayGround > Mounts and renders 1`] = `
     <tbody>
       <tr>
         <td>
-          <img
-            alt="CSSLOP Logo"
+          <a href="https://clean-css.github.io"><svg></svg></a>
+        </td>
+        <td>
+          v5.3.3
+        </td>
+        <td>
+          <pre><code>a{color:#663399}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            class="min-csskit-link"
+            href="https://csskit.rs/playground"
+            title="csskit"
+          ><svg></svg></a>
+        </td>
+        <td title="v0.0.28-canary.eddaa0a071">
+          v0.0.28
+        </td>
+        <td>
+          <pre><code>a{color:#639}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://TheJaredWilcurt.com/csslop"
+            title="CSSLOP"
+          ><img
+            alt="CSSLOP logo"
             class="min-csslop-logo"
-          />
+          /></a>
         </td>
         <td>
           v0.0.16
@@ -48,11 +77,11 @@ exports[`PlayGround > Mounts and renders 1`] = `
       </tr>
       <tr>
         <td>
-          <div class="min-csso-logo">
-            <span>
-              CSSO
-            </span>
-          </div>
+          <a
+            class="min-csso-logo"
+            href="https://css.github.io/csso/csso.html"
+            title="CSS Optimizer"
+          ><span>CSSO</span></a>
         </td>
         <td>
           v5.0.5

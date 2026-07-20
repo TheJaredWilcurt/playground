@@ -13,6 +13,7 @@ describe('PlayGround', () => {
     const wrapper = await setupWrapper();
 
     global.vueSnapshots.stubs = {
+      svg: { removeAttributes: true, removeInnerHtml: true },
       '.min-csslop-logo': { removeAttributes: ['src'] }
     };
 

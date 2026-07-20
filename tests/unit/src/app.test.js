@@ -12,6 +12,7 @@ describe('App', () => {
     const wrapper = await setupWrapper();
 
     global.vueSnapshots.stubs = {
+      '[d]': { removeAttributes: ['d'] },
       '.toolbar-logo': { removeAttributes: ['src'] },
       '.min-csslop-logo': { removeAttributes: ['src'] }
     };

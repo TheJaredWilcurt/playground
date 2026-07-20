@@ -28,6 +28,7 @@
       </thead>
       <tbody>
         <MinCleancss :input="input" />
+        <MinCsskit :input="input" />
         <MinCsslop :input="input" />
         <MinCsso :input="input" />
       </tbody>
@@ -44,12 +45,14 @@ import {
 } from 'fflate';
 
 import MinCleancss from '@/components/minifiers/MinCleancss.vue';
+import MinCsskit from '@/components/minifiers/MinCsskit.vue';
 import MinCsslop from '@/components/minifiers/MinCsslop.vue';
 import MinCsso from '@/components/minifiers/MinCsso.vue';
 
 export default {
   name: 'PlayGround',
   components: {
+    MinCsskit,
     MinCleancss,
     MinCsslop,
     MinCsso
@@ -86,7 +89,7 @@ export default {
     },
     loadUrlParams: function () {
       const url = new URL(window.location);
-      const value = url.searchParams.get('v')
+      const value = url.searchParams.get('v');
       if (value) {
         this.input = this.urlDecode(value);
       }
