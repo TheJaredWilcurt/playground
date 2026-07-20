@@ -83,6 +83,7 @@ exports[`App > Renders correctly 1`] = `
                 <path fill="#639" />
                 <path fill="#7339AD" />
                 <path fill="#8B51C5" />
+                <title>csskit logo</title>
               </svg></a>
           </td>
           <td title="v0.0.28-canary.eddaa0a071">
