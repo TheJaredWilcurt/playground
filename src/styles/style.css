@@ -1,0 +1,53 @@
+:root {
+  --background: hsl(from rebeccapurple h s 90% / alpha);
+  --color: hsl(from rebeccapurple h s 10% / alpha);
+  --toolbar-background: hsl(from rebeccapurple h s 80% / alpha);
+  --button-bg: hsl(from rebeccapurple h s l / alpha);
+  --button-fg: hsl(from rebeccapurple h s 100% / alpha);
+  --button-hover: hsl(from rebeccapurple h s calc(l + 5) / alpha);
+}
+
+.dark {
+  --background: hsl(from rebeccapurple h s 10% / alpha);
+  --color: hsl(from rebeccapurple h s 90% / alpha);
+  --toolbar-background: hsl(from rebeccapurple h s 20% / alpha);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--color);
+  font-family: 'Dinish Condensed', sans-serif;
+}
+
+button {
+  background: var(--button-bg);
+  color: var(--button-fg);
+  &:focus,
+  &:hover {
+    background: var(--button-hover);
+  }
+}
+
+textarea,
+pre,
+code {
+  font-family: Consolas, monospace;
+}
+
+pre {
+  background: var(--toolbar-background);
+  border: 0px;
+  border-radius: 0px 10px 10px;
+  margin: 0px;
+  padding: 10px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow: auto;
+  word-break: break-all;
+}

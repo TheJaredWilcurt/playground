@@ -1,0 +1,83 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > Renders correctly 1`] = `
+<header>
+  <div class="toolbar-logo-title">
+    <img
+      alt="CSS logo"
+      class="toolbar-logo"
+    />
+    <h1 class="toolbar-title">
+      CSS Minifier Playground
+    </h1>
+  </div>
+  <button class="theme-toggle-button">
+    Light
+  </button>
+</header>
+<main>
+  <div class="playground-container">
+    <form class="playground-form">
+      <label
+        class="playground-label"
+        for="input"
+      >
+        Input
+      </label>
+      <div class="playground-input-container">
+        <textarea
+          class="playground-input"
+          id="input"
+          value="'a {\\n  color: rebeccapurple;\\n}\\n'"
+        ></textarea>
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Minifier
+          </th>
+          <th>
+            Version
+          </th>
+          <th>
+            Output
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img
+              alt="CSSLOP Logo"
+              class="min-csslop-logo"
+            />
+          </td>
+          <td>
+            v0.0.16
+          </td>
+          <td>
+            <pre><code>a{color:#639}</code></pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="min-csso-logo">
+              <span>
+                CSSO
+              </span>
+            </div>
+          </td>
+          <td>
+            v5.0.5
+          </td>
+          <td>
+            <pre><code>a{color:#639}</code></pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+`;
