@@ -4,10 +4,10 @@ import { fileURLToPath, URL } from 'node:url';
 
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import vueDevTools from 'vite-plugin-vue-devtools';
 /* eslint-disable-next-line import-x/extensions */
 import { configDefaults } from 'vitest/config';
-import vueDevToolsAccessibility from 'vue-dev-tools-accessibility';
 
 const config = defineConfig({
   base: '/playground',
@@ -16,8 +16,11 @@ const config = defineConfig({
     vueDevTools({
       launchEditor: 'subl'
     }),
-    vueDevToolsAccessibility()
+    nodePolyfills()
   ],
+  optimizeDeps: {
+    exclude: ['vue-dev-tools-accessibility']
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

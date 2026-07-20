@@ -5,12 +5,14 @@
   --button-bg: hsl(from rebeccapurple h s l / alpha);
   --button-fg: hsl(from rebeccapurple h s 100% / alpha);
   --button-hover: hsl(from rebeccapurple h s calc(l + 5) / alpha);
+  --light-text: hsl(from rebeccapurple h s 30% / alpha);
 }
 
 .dark {
   --background: hsl(from rebeccapurple h s 10% / alpha);
   --color: hsl(from rebeccapurple h s 90% / alpha);
   --toolbar-background: hsl(from rebeccapurple h s 20% / alpha);
+  --light-text: hsl(from rebeccapurple h s 70% / alpha);
 }
 
 *,

@@ -1,9 +1,13 @@
 <template>
   <tr>
     <td>
-      <div class="min-csso-logo">
+      <a
+        class="min-csso-logo"
+        href="https://css.github.io/csso/csso.html"
+        title="CSS Optimizer"
+      >
         <span>CSSO</span>
-      </div>
+      </a>
     </td>
     <td>v{{ version }}</td>
     <td><pre><code v-text="output"></code></pre></td>
@@ -50,6 +54,7 @@ export default {
   color: #FFF;
   font-size: 11px;
   font-weight: bold;
+  text-decoration: none;
   text-transform: uppercase;
   span {
     text-rendering: geometricprecision;

@@ -18,7 +18,7 @@
         ></textarea>
       </div>
     </form>
-    <table>
+    <table class="playground-table">
       <thead>
         <tr>
           <th>Minifier</th>
@@ -27,6 +27,7 @@
         </tr>
       </thead>
       <tbody>
+        <MinCleancss :input="input" />
         <MinCsslop :input="input" />
         <MinCsso :input="input" />
       </tbody>
@@ -42,12 +43,14 @@ import {
   zlibSync
 } from 'fflate';
 
+import MinCleancss from '@/components/minifiers/MinCleancss.vue';
 import MinCsslop from '@/components/minifiers/MinCsslop.vue';
 import MinCsso from '@/components/minifiers/MinCsso.vue';
 
 export default {
   name: 'PlayGround',
   components: {
+    MinCleancss,
     MinCsslop,
     MinCsso
   },
@@ -131,5 +134,12 @@ export default {
   color: var(--color);
   resize: vertical;
   outline: 0px;
+}
+.playground-table tr > :nth-child(2) {
+  text-align: center;
+  padding: 0px 0px 0px 5px;
+}
+.playground-table td:nth-child(2) {
+  color: var(--light-text);
 }
 </style>

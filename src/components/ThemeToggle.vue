@@ -13,6 +13,8 @@
 </template>
 
 <script>
+const KEY = 'css-minifier-playground-theme';
+
 export default {
   name: 'ThemeToggle',
   data: function () {
@@ -24,9 +26,19 @@ export default {
     applyTheme: function () {
       if (this.isDark) {
         document.documentElement.classList.add('dark');
+        localStorage.setItem(KEY, 'dark');
       } else {
         document.documentElement.classList.remove('dark');
+        localStorage.setItem(KEY, 'light');
       }
+    },
+    loadTheme: function () {
+      this.isDark = true;
+      const value = localStorage.getItem(KEY);
+      if (value === 'light') {
+        this.isDark = false;
+      }
+      this.applyTheme();
     },
     toggleTheme: function () {
       this.isDark = !this.isDark;
@@ -34,7 +46,7 @@ export default {
     }
   },
   created: function () {
-    this.applyTheme();
+    this.loadTheme();
   }
 };
 </script>
