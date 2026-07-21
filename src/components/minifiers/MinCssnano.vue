@@ -68,9 +68,7 @@ export default {
       try {
         const result = await this.runner(this.input);
         this.output = result.css;
-        console.log({ result });
-      } catch (error) {
-        console.log({ error })
+      } catch {
         /**/
       }
     }
