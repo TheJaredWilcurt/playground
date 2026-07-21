@@ -2,7 +2,7 @@
   <tr>
     <td
       class="async-loading-td"
-      colspan="3"
+      colspan="4"
     >
       <span
         class="async-loading"
@@ -28,7 +28,6 @@ export default {
 }
 .async-loading {
   display: flex;
-  width: 248px;
   height: 35px;
   align-items: center;
   justify-content: center;

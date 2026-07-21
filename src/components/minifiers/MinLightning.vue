@@ -103,7 +103,7 @@ export default {
   font-weight: bold;
   letter-spacing: -.02em;
   -webkit-text-stroke: 0.8px var(--min-lightning-gold-text);
-  filter: drop-shadow(0 0 3px var(--min-lightning-gold-shadow))
-          drop-shadow(0 0 15px var(--min-lightning-gold));
+  filter: drop-shadow(0 0 2px var(--min-lightning-gold-shadow))
+          drop-shadow(0 0 7px var(--min-lightning-gold));
 }
 </style>

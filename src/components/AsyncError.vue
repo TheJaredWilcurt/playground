@@ -2,7 +2,7 @@
   <tr>
     <td
       class="async-error-td"
-      colspan="3"
+      colspan="4"
     >
       <span
         v-text="'[ ERROR LOADING MINIFIER ]'.replaceAll(' ', '&nbsp;')"
@@ -23,10 +23,12 @@ export default {
   text-align: center;
 }
 .async-error-error {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
   background: var(--toolbar-background);
   border-radius: 0px 10px 10px;
-  padding: 8px 33px;
   color: var(--color);
   font-weight: 900;
   letter-spacing: 1px;

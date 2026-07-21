@@ -28,11 +28,11 @@
         </tr>
       </thead>
       <tbody>
+        <MinCsslop :input="input" />
+        <MinLightning :input="input" />
         <MinCleancss :input="input" />
         <MinCsskit :input="input" />
-        <MinCsslop :input="input" />
         <MinCsso :input="input" />
-        <MinLightning :input="input" />
         <MinSass :input="input" />
       </tbody>
     </table>
@@ -49,6 +49,17 @@ import {
 
 import { asyncify } from '@/helpers/helpers.js';
 
+const input = `
+.foo {
+  color: rebeccapurple;
+}
+.foo:hover {
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent
+}
+`.trim();
+
 export default {
   name: 'PlayGround',
   components: {
@@ -61,7 +72,7 @@ export default {
   },
   data: function () {
     return {
-      input: 'a {\n  color: rebeccapurple;\n}\n'
+      input
     };
   },
   methods: {
@@ -133,7 +144,7 @@ export default {
 }
 .playground-input {
   width: 100%;
-  height: 150px;
+  height: 152px;
   border: 0px;
   background: transparent;
   color: var(--color);

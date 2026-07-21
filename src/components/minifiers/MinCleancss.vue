@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td>
+    <td class="min-clean-css-logo-td">
       <a href="https://clean-css.github.io">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -51,3 +51,15 @@ export default {
   }
 };
 </script>
+
+<style>
+.min-clean-css-logo-td {
+  background: var(--button-fg);
+  border-radius: 0px 10px 10px;
+  padding: 4px 4px 6px;
+}
+.dark .min-clean-css-logo-td {
+  background: transparent;
+  padding: 0px 0px 1px;
+}
+</style>
