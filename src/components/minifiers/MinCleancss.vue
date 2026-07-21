@@ -3,9 +3,13 @@
     :version="version"
     :output="output"
     :time="time"
+    :winner="winner"
   >
-    <td class="min-clean-css-logo-td">
-      <a href="https://clean-css.github.io">
+    <td>
+      <a
+        class="min-cleancss-link"
+        href="https://clean-css.github.io"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xml:space="preserve"
@@ -57,13 +61,16 @@ export default {
 </script>
 
 <style>
-.min-clean-css-logo-td {
+.min-cleancss-link {
+  display: flex;
+  height: 35px;
+  width: 64px;
   background: var(--button-fg);
   border-radius: 0px 10px 10px;
-  padding: 4px 4px 6px;
+  padding: 0px 4px;
 }
-.dark .min-clean-css-logo-td {
+.dark .min-cleancss-link {
   background: transparent;
-  padding: 0px 0px 1px;
+  padding: 1px 0px 0px;
 }
 </style>

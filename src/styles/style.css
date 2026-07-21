@@ -6,6 +6,7 @@
   --button-fg: hsl(from rebeccapurple h s 100% / alpha);
   --button-hover: hsl(from rebeccapurple h s calc(l + 5) / alpha);
   --light-text: hsl(from rebeccapurple h s 30% / alpha);
+  --checkmark: hsl(from rebeccapurple calc(h + 180) s l / alpha);
 }
 
 .dark {
@@ -23,6 +24,7 @@
 
 body {
   background: var(--background);
+  margin-bottom: 100px;
   color: var(--color);
   font-family: 'Dinish Condensed', sans-serif;
 }

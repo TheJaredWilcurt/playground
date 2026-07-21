@@ -1,6 +1,7 @@
 <template>
   <button
     class="theme-toggle-button"
+    title="Light/Dark mode toggle"
     @click="toggleTheme"
   >
     <template v-if="isDark">
@@ -55,6 +56,8 @@ export default {
 .theme-toggle-button {
   display: flex;
   align-items: end;
+  align-self: end;
+  height: 31.15px;
   border: 0px;
   border-radius: 0px 8px 8px;
   margin: 0px 10px 7px;

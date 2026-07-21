@@ -29,15 +29,17 @@
         </tr>
       </thead>
       <tbody>
-        <MinCsslop :input="input" />
-        <MinLightning :input="input" />
-        <MinCssnano :input="input" />
-        <MinCleancss :input="input" />
-        <MinCsskit :input="input" />
-        <MinCsso :input="input" />
-        <MinSass :input="input" />
+        <Component
+          v-for="(minifier, key) in minifiers"
+          :is="minifier"
+          :input="input"
+          :winner="winners.includes(key)"
+          @minified="setOutput(key, $event)"
+          :key="key"
+        />
       </tbody>
     </table>
+    <MarkDownTable :output="output" />
   </div>
 </template>
 
@@ -50,6 +52,16 @@ import {
 } from 'fflate';
 
 import { asyncify } from '@/helpers/helpers.js';
+
+const minifiers = {
+  csslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
+  lightning: asyncify(() => import('@/components/minifiers/MinLightning.vue')),
+  cssnano: asyncify(() => import('@/components/minifiers/MinCssnano.vue')),
+  cleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
+  csskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
+  csso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
+  sass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
+};
 
 const input = `
 .foo {
@@ -65,20 +77,44 @@ const input = `
 export default {
   name: 'PlayGround',
   components: {
-    MinCleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
-    MinCsskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
-    MinCsslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
-    MinCssnano: asyncify(() => import('@/components/minifiers/MinCssnano.vue')),
-    MinCsso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
-    MinLightning: asyncify(() => import('@/components/minifiers/MinLightning.vue')),
-    MinSass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
+    MarkDownTable: asyncify(() => import('@/components/MarkdownTable.vue'))
   },
   data: function () {
     return {
-      input
+      input,
+      output: {},
+      shortestMinifiedLength: 0,
+      winners: []
     };
   },
   methods: {
+    initializeOutput: function () {
+      Object.keys(minifiers).forEach((key) => {
+        this.output[key] = '';
+      });
+    },
+    setWinners: function () {
+      this.winners = [];
+      if (
+        this.shortestMinifiedLength &&
+        !Object.values(this.output).includes('')
+      ) {
+        for (const key in this.output) {
+          if (this.output[key].length === this.shortestMinifiedLength) {
+            this.winners.push(key);
+          }
+        }
+      }
+    },
+    setOutput: function (key, value) {
+      this.output[key] = value;
+      const values = Object.values(this.output);
+      const lengths = values.map((value) => {
+        return value.length;
+      });
+      this.shortestMinifiedLength = Math.min(...lengths);
+      this.setWinners();
+    },
     urlEncode: function (data) {
       const buffer = strToU8(data);
       const zipped = zlibSync(buffer, { level: 9 });
@@ -106,17 +142,31 @@ export default {
     loadUrlParams: function () {
       const url = new URL(window.location);
       const value = url.searchParams.get('v');
-      if (value) {
+      const input = url.searchParams.get('i');
+      if (input?.length) {
+        url.searchParams.delete('i');
+        history.replaceState({}, '', url);
+        this.input = input;
+      } else if (value) {
         this.input = this.urlDecode(value);
       }
     }
   },
+  computed: {
+    minifiers: function () {
+      return minifiers;
+    }
+  },
   watch: {
-    input: function () {
+    input: function (value) {
+      if (!value) {
+        this.winners = [];
+      }
       this.setUrlParams();
     }
   },
   created: function () {
+    this.initializeOutput();
     this.loadUrlParams();
   }
 };

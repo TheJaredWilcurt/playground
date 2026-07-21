@@ -3,6 +3,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :winner="winner"
   >
     <td>
       <a

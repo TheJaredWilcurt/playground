@@ -3,6 +3,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :winner="winner"
   >
     <td class="min-lightning-logo-td">
       <a
@@ -82,16 +83,19 @@ export default {
   --min-lightning-gold: lch(80% 82.34 80.104);
   --min-lightning-gold-text: lch(85% 82.34 80.104);
   --min-lightning-gold-shadow: lch(80% 82.34 80.104/.7);
+}
+.min-lightning-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
   height: 35px;
   background: var(--color);
   border-radius: 0px 10px 10px;
-  padding: 0px 1px 5px;
-}
-.dark .min-lightning-logo-td {
-  background: transparent;
-}
-.min-lightning-link {
   text-decoration: none;
+}
+.dark .min-lightning-link {
+  background: transparent;
 }
 .min-lightning-logo {
   height: 14px;

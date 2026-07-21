@@ -10,8 +10,13 @@ export default {
     input: {
       type: String,
       default: ''
+    },
+    winner: {
+      type: Boolean,
+      default: false
     }
   },
+  emits: ['minified'],
   data: function () {
     return {
       output: '',
@@ -27,6 +32,12 @@ export default {
     input: {
       handler: function () {
         this.minify();
+      },
+      immediate: true
+    },
+    output: {
+      handler: function () {
+        this.$emit('minified', this.output);
       },
       immediate: true
     }

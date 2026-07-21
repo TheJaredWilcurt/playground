@@ -3,9 +3,11 @@
     :version="version"
     :output="output"
     :time="time"
+    :winner="winner"
   >
-    <td class="min-cssnano-logo-td">
+    <td>
       <a
+        class="min-cssnano-link"
         href="https://cssnano.github.io/cssnano/playground"
         title="CSSNANO"
       >
@@ -81,12 +83,15 @@ export default {
 </script>
 
 <style>
-.min-cssnano-logo-td {
+.min-cssnano-link {
+  display: flex;
+  width: 64px;
+  height: 35px;
   background: var(--light-text);
   border-radius: 0px 10px 10px;
   padding: 0px 3px 0px 4px;
 }
-.dark .min-cssnano-logo-td {
+.dark .min-cssnano-link {
   background: transparent;
 }
 </style>
