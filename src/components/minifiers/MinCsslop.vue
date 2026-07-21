@@ -1,5 +1,9 @@
 <template>
-  <tr>
+  <MinifierTemplate
+    :version="version"
+    :output="output"
+    :time="time"
+  >
     <td>
       <a
         href="https://TheJaredWilcurt.com/csslop"
@@ -12,10 +16,7 @@
         />
       </a>
     </td>
-    <td>v{{ version }}</td>
-    <td><pre><code v-text="output"></code></pre></td>
-    <td>{{ output.length }}</td>
-  </tr>
+  </MinifierTemplate>
 </template>
 
 <script>
@@ -32,11 +33,14 @@ export default {
   },
   methods: {
     minify: function () {
+      let start = new Date();
       try {
         this.output = minify(this.input);
       } catch {
         /**/
       }
+      let end = new Date();
+      this.duration = end - start;
     }
   }
 };

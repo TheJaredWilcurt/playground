@@ -1,6 +1,10 @@
 <template>
-  <tr>
-    <td>
+  <MinifierTemplate
+    :version="version"
+    :output="output"
+    :time="time"
+  >
+    <td class="min-cssnano-logo-td">
       <a
         href="https://cssnano.github.io/cssnano/playground"
         title="CSSNANO"
@@ -21,10 +25,7 @@
         </svg>
       </a>
     </td>
-    <td>v{{ version }}</td>
-    <td><pre><code v-text="output"></code></pre></td>
-    <td>{{ output.length }}</td>
-  </tr>
+  </MinifierTemplate>
 </template>
 
 <script>
@@ -65,16 +66,27 @@ export default {
       });
     },
     minify: async function () {
+      let start = new Date();
       try {
         const result = await this.runner(this.input);
         this.output = result.css;
       } catch {
         /**/
       }
+      let end = new Date();
+      this.duration = end - start;
     }
   }
 };
 </script>
 
 <style>
+.min-cssnano-logo-td {
+  background: var(--light-text);
+  border-radius: 0px 10px 10px;
+  padding: 0px 3px 0px 4px;
+}
+.dark .min-cssnano-logo-td {
+  background: transparent;
+}
 </style>

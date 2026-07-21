@@ -1,6 +1,10 @@
 <template>
-  <tr class="min-lightning-tr">
-    <td>
+  <MinifierTemplate
+    :version="version"
+    :output="output"
+    :time="time"
+  >
+    <td class="min-lightning-logo-td">
       <a
         class="min-lightning-link"
         href="https://LightningCSS.dev/playground"
@@ -24,10 +28,7 @@
         </span>
       </a>
     </td>
-    <td>v{{ version }}</td>
-    <td><pre><code v-text="output"></code></pre></td>
-    <td>{{ output.length }}</td>
-  </tr>
+  </MinifierTemplate>
 </template>
 <script>
 import init, {
@@ -50,6 +51,7 @@ export default {
   methods: {
     minify: async function () {
       await init();
+      let start = new Date();
       try {
         const targets = browserslistToTargets([
           'last 1 Chrome version',
@@ -68,17 +70,25 @@ export default {
       } catch {
         /**/
       }
+      let end = new Date();
+      this.duration = end - start;
     }
-  },
-  created: function () {}
+  }
 };
 </script>
 
 <style>
-.min-lightning-tr {
+.min-lightning-logo-td {
   --min-lightning-gold: lch(80% 82.34 80.104);
   --min-lightning-gold-text: lch(85% 82.34 80.104);
   --min-lightning-gold-shadow: lch(80% 82.34 80.104/.7);
+  height: 35px;
+  background: var(--color);
+  border-radius: 0px 10px 10px;
+  padding: 0px 1px 5px;
+}
+.dark .min-lightning-logo-td {
+  background: transparent;
 }
 .min-lightning-link {
   text-decoration: none;

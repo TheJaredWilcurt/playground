@@ -1,5 +1,9 @@
 <template>
-  <tr>
+  <MinifierTemplate
+    :version="version"
+    :output="output"
+    :time="time"
+  >
     <td>
       <a
         class="min-sass-link"
@@ -19,10 +23,7 @@
         </svg>
       </a>
     </td>
-    <td>v{{ version }}</td>
-    <td><pre><code v-text="output"></code></pre></td>
-    <td>{{ output.length }}</td>
-  </tr>
+  </MinifierTemplate>
 </template>
 
 <script>
@@ -45,6 +46,7 @@ export default {
   },
   methods: {
     minify: async function () {
+      let start = new Date();
       const options = {
         // Removes ASCII CLI color codes from warnings
         alertColor: false,
@@ -61,6 +63,8 @@ export default {
       } catch {
         /**/
       }
+      let end = new Date();
+      this.duration = end - start;
     }
   }
 };

@@ -1,5 +1,9 @@
 <template>
-  <tr>
+  <MinifierTemplate
+    :version="version"
+    :output="output"
+    :time="time"
+  >
     <td>
       <a
         class="min-csso-logo"
@@ -9,10 +13,7 @@
         <span>CSSO</span>
       </a>
     </td>
-    <td>v{{ version }}</td>
-    <td><pre><code v-text="output"></code></pre></td>
-    <td>{{ output.length }}</td>
-  </tr>
+  </MinifierTemplate>
 </template>
 
 <script>
@@ -28,6 +29,7 @@ export default {
   },
   methods: {
     minify: function () {
+      let start = new Date();
       try {
         const options = {
           restructure: true,
@@ -37,6 +39,8 @@ export default {
       } catch {
         /**/
       }
+      let end = new Date();
+      this.duration = end - start;
     }
   }
 };

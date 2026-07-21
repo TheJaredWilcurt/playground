@@ -1,4 +1,11 @@
+import { formatMs } from '@/helpers/helpers.js';
+
+import MinifierTemplate from '@/components/MinifierTemplate.vue';
+
 export default {
+  components: {
+    MinifierTemplate
+  },
   props: {
     input: {
       type: String,
@@ -7,8 +14,14 @@ export default {
   },
   data: function () {
     return {
-      output: ''
+      output: '',
+      duration: 0
     };
+  },
+  computed: {
+    time: function () {
+      return formatMs(this.duration);
+    }
   },
   watch: {
     input: {

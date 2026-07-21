@@ -8,7 +8,7 @@
         for="input"
         class="playground-label"
       >
-        Input ({{ input.length }})
+        Input ({{ input.length.toLocaleString() }})
       </label>
       <div class="playground-input-container">
         <textarea
@@ -23,6 +23,7 @@
         <tr>
           <th>Minifier</th>
           <th>Version</th>
+          <th>Time</th>
           <th>Output</th>
           <th>Length</th>
         </tr>
@@ -154,7 +155,6 @@ export default {
   outline: 0px;
 }
 .playground-table tr > :nth-child(2) {
-  text-align: center;
   padding: 0px 0px 0px 5px;
 }
 .playground-table td:nth-child(2) {

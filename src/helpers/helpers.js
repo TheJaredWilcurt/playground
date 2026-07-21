@@ -1,3 +1,4 @@
+import prettyMilliseconds from 'pretty-ms';
 import { defineAsyncComponent } from 'vue';
 
 import AsyncError from '@/components/AsyncError.vue';
@@ -22,4 +23,19 @@ export const asyncify = function (loader) {
     // Time to wait before showing error component
     timeout: 30 * 1000
   });
+};
+
+/**
+ * Formats the time for display.
+ *
+ * @param  {number} duration  Time in ms
+ * @return {string}           Formatted time
+ */
+export const formatMs = function (duration) {
+  const options = {
+    keepDecimalsOnWholeSeconds: true,
+    secondsDecimalDigits: 3
+  };
+  const time = prettyMilliseconds(duration, options);
+  return time;
 };
