@@ -8,7 +8,7 @@
         for="input"
         class="playground-label"
       >
-        Input
+        Input ({{ input.length }})
       </label>
       <div class="playground-input-container">
         <textarea
@@ -24,6 +24,7 @@
           <th>Minifier</th>
           <th>Version</th>
           <th>Output</th>
+          <th>Length</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,7 @@
         <MinCsskit :input="input" />
         <MinCsslop :input="input" />
         <MinCsso :input="input" />
+        <MinLightning :input="input" />
         <MinSass :input="input" />
       </tbody>
     </table>
@@ -54,6 +56,7 @@ export default {
     MinCleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
     MinCsslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
     MinCsso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
+    MinLightning: asyncify(() => import('@/components/minifiers/MinLightning.vue')),
     MinSass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
   },
   data: function () {

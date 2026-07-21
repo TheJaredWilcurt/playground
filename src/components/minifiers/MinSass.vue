@@ -21,6 +21,7 @@
     </td>
     <td>v{{ version }}</td>
     <td><pre><code v-text="output"></code></pre></td>
+    <td>{{ output.length }}</td>
   </tr>
 </template>
 

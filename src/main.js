@@ -5,7 +5,7 @@ import App from '@/App.vue';
 
 import 'normalize.css/normalize.css';
 import '@sarap422/font-dinish/font-face.css';
-import '@/styles/consolas.css';
+import '@/styles/fonts.css';
 import '@/styles/style.css';
 
 const app = createApp(App);

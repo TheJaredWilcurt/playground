@@ -12,6 +12,7 @@ const __dirname = import.meta.dirname;
 const config = defineConfig({
   base: '/playground',
   build: {
+    chunkSizeWarningLimit: 16_000,
     outDir: resolve(__dirname, 'site'),
     sourcemap: false
   },

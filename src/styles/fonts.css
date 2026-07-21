@@ -11,3 +11,10 @@
   font-weight: bold;
   src: local('Consolas'), url('/fonts/consolas-bold.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'urbane-rounded';
+  font-style: normal;
+  font-weight: bold;
+  src: local('urbane-rounded'), url('/fonts/urbane-rounded.woff2') format('woff2');
+}
