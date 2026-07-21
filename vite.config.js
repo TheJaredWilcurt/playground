@@ -14,7 +14,8 @@ const config = defineConfig({
   build: {
     chunkSizeWarningLimit: 16_000,
     outDir: resolve(__dirname, 'site'),
-    sourcemap: false
+    sourcemap: false,
+    target: 'baseline-widely-available'
   },
   plugins: [
     vue(),
@@ -33,6 +34,13 @@ const config = defineConfig({
         'esm',
         'mock',
         'empty.js'
+      ),
+      svgo: resolve(
+        __dirname,
+        'node_modules',
+        'svgo',
+        'dist',
+        'svgo.browser.js'
       ),
       path: 'path-browserify',
       os: 'os-browserify/browser',
