@@ -59,7 +59,7 @@ export default {
   },
   data: function () {
     return {
-      show: true,
+      show: false,
       table: '',
       copied: false
     };
@@ -137,6 +137,7 @@ export default {
 .markdown-table-label-button {
   background: transparent;
   border: 0px;
+  color: currentcolor;
   cursor: pointer;
   &:hover,
   &:focus {
@@ -147,25 +148,23 @@ export default {
   }
 }
 .markdown-table-label {
+  color: currentcolor;
   font-weight: bold;
   cursor: pointer;
 }
 .markdown-table-pointer {
   position: relative;
-  top: -2px;
-  left: 0px;
   display: inline-block;
   font-size: 10px;
-  transition: 750ms ease all;
+  transform: translate(0px, -2px) rotate(0deg);
+  transition: 750ms ease transform;
 }
 .markdown-table-pointer-rotate {
-  top: -1px;
-  left: 2px;
-  transform: rotate(90deg);
+  transform: translate(0px, -1px) rotate(90deg);
 }
 .markdown-table-pre {
   max-width: 800px;
-  max-height: 200px;
+  max-height: 228px;
   overflow: auto;
 }
 .markdown-table-button-container {
@@ -196,5 +195,8 @@ export default {
   font-weight: bold;
   font-size: 21px;
   text-transform: uppercase;
+  &:focus-visible {
+    outline: 1px dotted currentcolor;
+  }
 }
 </style>

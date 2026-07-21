@@ -80,9 +80,9 @@ header {
 .toolbar-github {
   width: 31.15px;
   height: 31.15px;
-  fill: var(--button-bg);
+  fill: var(--button-hover);
   &:hover {
-    fill: var(--button-hover);
+    fill: var(--light-text);
   }
 }
 </style>
