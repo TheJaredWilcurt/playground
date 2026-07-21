@@ -45,20 +45,16 @@ import {
   zlibSync
 } from 'fflate';
 
-import MinCleancss from '@/components/minifiers/MinCleancss.vue';
-import MinCsskit from '@/components/minifiers/MinCsskit.vue';
-import MinCsslop from '@/components/minifiers/MinCsslop.vue';
-import MinCsso from '@/components/minifiers/MinCsso.vue';
-import MinSass from '@/components/minifiers/MinSass.vue';
+import { asyncify } from '@/helpers/helpers.js';
 
 export default {
   name: 'PlayGround',
   components: {
-    MinCsskit,
-    MinCleancss,
-    MinCsslop,
-    MinCsso,
-    MinSass
+    MinCsskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
+    MinCleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
+    MinCsslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
+    MinCsso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
+    MinSass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
   },
   data: function () {
     return {

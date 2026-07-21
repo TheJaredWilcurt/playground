@@ -15,63 +15,7 @@ const config = defineConfig({
   base: '/playground',
   build: {
     outDir: resolve(__dirname, 'site'),
-    sourcemap: false,
-    rolldownOptions: {
-      output: {
-        codeSplitting: {
-          groups: [
-            {
-              test: /node_modules\/@thejaredwilcurt\/csslop/,
-              name: 'codemirror'
-            },
-            {
-              test: /node_modules\/@csstools\/css-calc/,
-              name: 'css-calc'
-            },
-            {
-              test: /node_modules\/@node-projects\/css-parser/,
-              name: 'css-parser'
-            },
-            {
-              test: /node_modules\/csskit/,
-              name: 'csskit'
-            },
-            {
-              test: /node_modules\/clean-css/,
-              name: 'clean-css'
-            },
-            {
-              test: /node_modules\/csso/,
-              name: 'csso'
-            },
-            {
-              test: /node_modules\/fflate/,
-              name: 'fflate'
-            },
-            {
-              test: /node_modules\/vue-options-api-constants-plugin/,
-              name: 'vue-options-api-constants-plugin'
-            },
-            {
-              test: /node_modules\/sass/,
-              name: 'sass'
-            },
-            {
-              test: /node_modules\/vue/,
-              name: 'vue'
-            },
-            {
-              test: /node_modules/,
-              name: 'lib'
-            },
-            {
-              test: /index\.js/,
-              name: 'CSSLOP'
-            }
-          ]
-        }
-      }
-    }
+    sourcemap: false
   },
   plugins: [
     vue(),
