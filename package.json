@@ -16,11 +16,11 @@
     "@sarap422/font-dinish": "^1.0.6",
     "@thejaredwilcurt/csslop": "^0.0.16",
     "clean-css": "^5.3.3",
-    "csskit": "^0.0.28-canary.eddaa0a071",
+    "csskit": "^3.0.2",
     "csso": "^5.0.5",
     "fflate": "^0.8.3",
     "normalize.css": "^8.0.1",
-    "sass": "^1.101.0",
+    "sass": "^1.101.3",
     "vue": "^3.5.40",
     "vue-options-api-constants-plugin": "^1.0.3"
   },
