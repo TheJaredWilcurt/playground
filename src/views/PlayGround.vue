@@ -30,6 +30,7 @@
       <tbody>
         <MinCsslop :input="input" />
         <MinLightning :input="input" />
+        <MinCssnano :input="input" />
         <MinCleancss :input="input" />
         <MinCsskit :input="input" />
         <MinCsso :input="input" />
@@ -56,16 +57,17 @@ const input = `
 .foo:hover {
   border-width: 1px;
   border-style: solid;
-  border-color: transparent
+  border-color: transparent;
 }
 `.trim();
 
 export default {
   name: 'PlayGround',
   components: {
-    MinCsskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
     MinCleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
+    MinCsskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
     MinCsslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
+    MinCssnano: asyncify(() => import('@/components/minifiers/MinCssnano.vue')),
     MinCsso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
     MinLightning: asyncify(() => import('@/components/minifiers/MinLightning.vue')),
     MinSass: asyncify(() => import('@/components/minifiers/MinSass.vue'))

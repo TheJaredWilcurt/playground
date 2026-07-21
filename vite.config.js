@@ -25,7 +25,19 @@ const config = defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'fs/promises': resolve(
+        __dirname,
+        'node_modules',
+        'node-stdlib-browser',
+        'esm',
+        'mock',
+        'empty.js'
+      ),
+      path: 'path-browserify',
+      os: 'os-browserify/browser',
+      string_decoder: 'string_decoder/',
+      buffer: 'buffer/'
     }
   }
 });
