@@ -22,6 +22,7 @@
     "csso": "^5.0.5",
     "fflate": "^0.8.3",
     "normalize.css": "^8.0.1",
+    "sass": "^1.101.0",
     "vue": "^3.5.40",
     "vue-options-api-constants-plugin": "^1.0.3"
   },
@@ -54,6 +55,7 @@
     "@rollup/rollup-linux-x64-gnu": "^4.62.2"
   },
   "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
     "unrs-resolver@1.12.2": true
   },
   "devEngines": {

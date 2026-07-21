@@ -90,6 +90,21 @@ exports[`PlayGround > Mounts and renders 1`] = `
           <pre><code>a{color:#639}</code></pre>
         </td>
       </tr>
+      <tr>
+        <td>
+          <a
+            class="min-sass-link"
+            href="https://sass-lang.com/playground/#eJwzNAAAAJQAYg=="
+            title="Sass"
+          ><svg></svg></a>
+        </td>
+        <td>
+          v1.101.0
+        </td>
+        <td>
+          <pre><code>a{color:#639}</code></pre>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

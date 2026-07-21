@@ -1,3 +1,5 @@
+import { flushPromises } from '@vue/test-utils';
+
 import PlayGround from '@/views/PlayGround.vue';
 
 import testHelpers from '@@/unit/testHelpers.js';
@@ -11,6 +13,7 @@ describe('PlayGround', () => {
 
   test('Mounts and renders', async () => {
     const wrapper = await setupWrapper();
+    await flushPromises();
 
     global.vueSnapshots.stubs = {
       svg: { removeAttributes: true, removeInnerHtml: true },

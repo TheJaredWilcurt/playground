@@ -31,6 +31,7 @@
         <MinCsskit :input="input" />
         <MinCsslop :input="input" />
         <MinCsso :input="input" />
+        <MinSass :input="input" />
       </tbody>
     </table>
   </div>
@@ -48,6 +49,7 @@ import MinCleancss from '@/components/minifiers/MinCleancss.vue';
 import MinCsskit from '@/components/minifiers/MinCsskit.vue';
 import MinCsslop from '@/components/minifiers/MinCsslop.vue';
 import MinCsso from '@/components/minifiers/MinCsso.vue';
+import MinSass from '@/components/minifiers/MinSass.vue';
 
 export default {
   name: 'PlayGround',
@@ -55,7 +57,8 @@ export default {
     MinCsskit,
     MinCleancss,
     MinCsslop,
-    MinCsso
+    MinCsso,
+    MinSass
   },
   data: function () {
     return {

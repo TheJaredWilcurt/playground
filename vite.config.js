@@ -15,7 +15,7 @@ const config = defineConfig({
   base: '/playground',
   build: {
     outDir: resolve(__dirname, 'site'),
-    sourcemap: true,
+    sourcemap: false,
     rolldownOptions: {
       output: {
         codeSplitting: {
@@ -51,6 +51,10 @@ const config = defineConfig({
             {
               test: /node_modules\/vue-options-api-constants-plugin/,
               name: 'vue-options-api-constants-plugin'
+            },
+            {
+              test: /node_modules\/sass/,
+              name: 'sass'
             },
             {
               test: /node_modules\/vue/,

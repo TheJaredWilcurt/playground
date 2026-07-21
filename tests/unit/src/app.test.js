@@ -1,3 +1,5 @@
+import { flushPromises } from '@vue/test-utils';
+
 import App from '@/App.vue';
 
 import testHelpers from '@@/unit/testHelpers.js';
@@ -10,6 +12,7 @@ describe('App', () => {
 
   test('Renders correctly', async () => {
     const wrapper = await setupWrapper();
+    await flushPromises();
 
     global.vueSnapshots.stubs = {
       '[d]': { removeAttributes: ['d'] },
