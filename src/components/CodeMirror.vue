@@ -54,7 +54,7 @@ export default {
 #codemirror.code-mirror-playground {
   .cm-editor {
     min-height: 25px;
-    height: 145px;
+    height: 153px;
     background: var(--toolbar-background);
     border-radius: 0px;
     overflow: auto;
