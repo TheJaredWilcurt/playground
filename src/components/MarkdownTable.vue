@@ -45,7 +45,7 @@
 
 <script>
 import hljs from 'highlight.js/lib/core';
-import markdown from 'highlight.js/lib/languages/markdown.js';
+import markdown from 'highlight.js/lib/languages/markdown';
 import { DoxenAccordion } from 'vue-doxen';
 
 hljs.registerLanguage('markdown', markdown);
@@ -57,6 +57,10 @@ export default {
   },
   props: {
     output: {
+      type: Object,
+      required: true
+    },
+    versions: {
       type: Object,
       required: true
     }
@@ -72,19 +76,38 @@ export default {
     makeTable: function () {
       const longest = this.longest;
       const sizeLong = this.sizeLongest;
+      const versionLong = this.versionLongest;
       let table = '';
       table = table + '\n* * *\n\n';
       table = table + '[CSS Minifier Playground](' + location.href + ')\n\n';
-      table = table + ('Minifier').padEnd(longest) + ' | ' + ('Size').padEnd(sizeLong) + ' | Output\n';
-      table = table + (':--').padEnd(longest) + ' | ' + (':--').padEnd(sizeLong) + ' | :--\n';
+      table = table + [
+        ('Minifier').padEnd(longest),
+        ' | ',
+        ('Version').padEnd(versionLong),
+        ' | ',
+        ('Size').padEnd(sizeLong),
+        ' | Output\n'
+      ].join('');
+      table = table + [
+        (':--').padEnd(longest),
+        ' | ',
+        (':--:').padEnd(versionLong),
+        ' | ',
+        (':--').padEnd(sizeLong),
+        ' | :--\n'
+      ].join('');
       for (const key in this.output) {
+        const data = this.output?.[key] || '';
+        const version = 'v' + (this.versions?.[key] || '?');
         table = [
           table,
           key.padEnd(longest),
           ' | ',
-          String(this.output[key].length).padEnd(sizeLong),
+          version.padEnd(versionLong),
+          ' | ',
+          String(data.length).padEnd(sizeLong),
           ' | `',
-          this.output[key].replaceAll('\n', '\\n'),
+          data.replaceAll('\n', '\\n'),
           '`\n'
         ].join('');
       }
@@ -118,6 +141,17 @@ export default {
       for (const key in this.output) {
         const size = String(this.output[key].length);
         items.push(size);
+      }
+      const lengths = items.map((item) => {
+        return item.length;
+      });
+      return Math.max(...lengths);
+    },
+    versionLongest: function () {
+      const items = ['Version'];
+      for (const key in this.versions) {
+        const version = String(this.versions[key].length);
+        items.push(version);
       }
       const lengths = items.map((item) => {
         return item.length;

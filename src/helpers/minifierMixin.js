@@ -16,7 +16,10 @@ export default {
       default: false
     }
   },
-  emits: ['minified'],
+  emits: [
+    'minified',
+    'version'
+  ],
   data: function () {
     return {
       output: '',
@@ -38,6 +41,12 @@ export default {
     output: {
       handler: function () {
         this.$emit('minified', this.output);
+      },
+      immediate: true
+    },
+    version: {
+      handler: function () {
+        this.$emit('version', this.version);
       },
       immediate: true
     }

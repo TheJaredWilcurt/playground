@@ -35,11 +35,15 @@
           :input="input"
           :winner="winners.includes(key)"
           @minified="setOutput(key, $event)"
+          @version="setVersion(key, $event)"
           :key="key"
         />
       </tbody>
     </table>
-    <MarkDownTable :output="output" />
+    <MarkDownTable
+      :output="output"
+      :versions="versions"
+    />
   </div>
 </template>
 
@@ -83,14 +87,16 @@ export default {
     return {
       input,
       output: {},
+      versions: {},
       shortestMinifiedLength: 0,
       winners: []
     };
   },
   methods: {
-    initializeOutput: function () {
+    initialize: function () {
       Object.keys(minifiers).forEach((key) => {
         this.output[key] = '';
+        this.versions[key] = '';
       });
     },
     setWinners: function () {
@@ -114,6 +120,9 @@ export default {
       });
       this.shortestMinifiedLength = Math.min(...lengths);
       this.setWinners();
+    },
+    setVersion: function (key, value) {
+      this.versions[key] = value;
     },
     urlEncode: function (data) {
       const buffer = strToU8(data);
@@ -166,7 +175,7 @@ export default {
     }
   },
   created: function () {
-    this.initializeOutput();
+    this.initialize();
     this.loadUrlParams();
   }
 };
