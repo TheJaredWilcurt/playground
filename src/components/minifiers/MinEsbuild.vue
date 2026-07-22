@@ -37,13 +37,9 @@
 </template>
 
 <script>
-import * as esbuild from 'esbuild-wasm';
-
-import { dependencies } from '../../../package.json' with { type: 'json' };
+import { version, initialize, build } from 'esbuild-wasm';
 
 import minifierMixin from '@/helpers/minifierMixin.js';
-
-const version = esbuild.version;
 
 export default {
   name: 'MinSass',
@@ -59,7 +55,7 @@ export default {
   methods: {
     minify: async function () {
       if (!this.initialized) {
-        await esbuild.initialize({
+        await initialize({
           wasmModule: await WebAssembly.compileStreaming(fetch('/playground/node_modules/esbuild-wasm/esbuild.wasm'))
         });
       }
@@ -72,11 +68,11 @@ export default {
             contents: this.input,
             resolveDir: './src',
             sourcefile: 'imaginary-file.js',
-            loader: 'css',
+            loader: 'css'
           },
           minify: true
         };
-        const result = await esbuild.build(options);
+        const result = await build(options);
         const code = result.outputFiles[0].contents;
         const minified = new TextDecoder().decode(code);
         this.output = (minified || '').trim();

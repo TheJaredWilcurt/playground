@@ -1,10 +1,19 @@
 <template>
-  <footer>
+  <footer class="the-footer">
     <p>
-      100% by <a href="https://github.com/TheJaredWilcurt">TheJaredWilcurt</a> (0% by AI)
+      100% by
+      <a
+        class="the-footer-link"
+        href="https://github.com/TheJaredWilcurt"
+      >TheJaredWilcurt</a>
+      (0% by AI)
     </p>
     <p>
-      Inspired by <a href="https://www.keithcirkel.co.uk/css-minify-tests">css-minify-tests</a>
+      Inspired by
+      <a
+        class="the-footer-link"
+        href="https://www.keithcirkel.co.uk/css-minify-tests"
+      >css-minify-tests</a>
     </p>
     <p>
       MIT Licensed
@@ -50,10 +59,13 @@ export default {
 </script>
 
 <style>
-footer {
+.the-footer {
   text-align: center;
   margin-top: 50px;
   font-size: 12px;
   color: var(--hljs-tag);
+}
+.the-footer-link {
+  color: var(--light-text);
 }
 </style>

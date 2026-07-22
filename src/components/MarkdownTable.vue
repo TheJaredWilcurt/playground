@@ -18,11 +18,13 @@
       </label>
     </button>
     <DoxenAccordion :show="show">
-      <pre
-        v-html="formatted"
-        id="markdown-table"
-        class="markdown-table-pre"
-      ></pre>
+      <div class="markdown-table-pre-container">
+        <pre
+          v-html="formatted"
+          id="markdown-table"
+          class="markdown-table-pre"
+        ></pre>
+      </div>
       <div class="markdown-table-button-container">
         <transition name="markdown-table-fade">
           <span
@@ -44,6 +46,7 @@
 </template>
 
 <script>
+/* eslint-disable import-x/extensions */
 import hljs from 'highlight.js/lib/core';
 import markdown from 'highlight.js/lib/languages/markdown';
 import { DoxenAccordion } from 'vue-doxen';
@@ -127,7 +130,7 @@ export default {
   },
   computed: {
     formatted: function () {
-      return hljs.highlight(this.table, { language: 'markdown' }).value;
+      return hljs.highlight(this.table.trim(), { language: 'markdown' }).value;
     },
     longest: function () {
       const keys = Object.keys(this.output);
@@ -203,9 +206,15 @@ export default {
 .markdown-table-pointer-rotate {
   transform: translate(0px, -1px) rotate(90deg);
 }
+.markdown-table-pre-container {
+  background: var(--toolbar-background);
+  border-radius: 0px 23px 23px;
+  padding: 20px 0px;
+}
 .markdown-table-pre {
+  background: transparent;
   max-width: 800px;
-  max-height: 260px;
+  max-height: 250px;
   overflow: auto;
 }
 .markdown-table-button-container {

@@ -4,7 +4,10 @@
       class="playground-form"
       @submit.prevent
     >
-      <label class="playground-label">
+      <label
+        for="codemirror"
+        class="playground-label"
+      >
         Input ({{ input.length.toLocaleString() }})
       </label>
       <CodeMirror
@@ -197,12 +200,9 @@ export default {
   font-weight: bold;
 }
 .playground-input-container {
-  height: 175px;
   background: var(--toolbar-background);
   border-radius: 0px 40px 40px;
   padding: 15px;
-  overflow: auto;
-  resize: vertical;
 }
 .playground-table tr > :nth-child(2) {
   padding: 0px 0px 0px 5px;

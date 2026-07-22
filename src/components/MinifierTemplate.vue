@@ -22,6 +22,7 @@
 </template>
 
 <script>
+/* eslint-disable import-x/extensions */
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
 

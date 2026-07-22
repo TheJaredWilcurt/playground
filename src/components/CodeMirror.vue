@@ -53,15 +53,19 @@ export default {
 <style>
 #codemirror.code-mirror-playground {
   .cm-editor {
+    min-height: 25px;
+    height: 145px;
     background: var(--toolbar-background);
-    border-radius: 10px;
+    border-radius: 0px;
+    overflow: auto;
+    resize: vertical;
   }
   .cm-focused { outline: none; }
   .cm-cursor { border-color: #000; }
   .cm-gutters { background: var(--background); }
   .cm-activeLineGutter { background: var(--light-text); }
   .cm-activeLine { background-color: #CCEEFF87; }
-  .cm-scroller { border-radius: 10px; }
+  .cm-scroller { border-radius: 0px 29px 29px; }
   .hljs { background: var(--background); }
   ::selection,
   ::-moz-selection {

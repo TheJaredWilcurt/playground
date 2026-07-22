@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import PlayGround from '@/views/PlayGround.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import ToolBar from '@/components/ToolBar.vue';
+import PlayGround from '@/views/PlayGround.vue';
 
 export default {
   name: 'App',
