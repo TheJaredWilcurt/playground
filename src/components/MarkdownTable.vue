@@ -19,7 +19,7 @@
     </button>
     <DoxenAccordion :show="show">
       <pre
-        v-text="table"
+        v-html="formatted"
         id="markdown-table"
         class="markdown-table-pre"
       ></pre>
@@ -44,7 +44,11 @@
 </template>
 
 <script>
+import hljs from 'highlight.js/lib/core';
+import markdown from 'highlight.js/lib/languages/markdown.js';
 import { DoxenAccordion } from 'vue-doxen';
+
+hljs.registerLanguage('markdown', markdown);
 
 export default {
   name: 'MarkdownTable',
@@ -80,7 +84,7 @@ export default {
           ' | ',
           String(this.output[key].length).padEnd(sizeLong),
           ' | `',
-          this.output[key],
+          this.output[key].replaceAll('\n', '\\n'),
           '`\n'
         ].join('');
       }
@@ -99,6 +103,9 @@ export default {
     }
   },
   computed: {
+    formatted: function () {
+      return hljs.highlight(this.table, { language: 'markdown' }).value;
+    },
     longest: function () {
       const keys = Object.keys(this.output);
       const lengths = keys.map((key) => {

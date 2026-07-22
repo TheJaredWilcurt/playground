@@ -6,7 +6,7 @@
       :title="'v' + (fullVersion || version)"
     >v{{ version }}</td>
     <td class="minifier-template-center">{{ time }}</td>
-    <td><pre class="minifier-template-pre"><code v-text="output"></code></pre></td>
+    <td><pre class="minifier-template-pre"><code v-html="formatted"></code></pre></td>
     <td class="minifier-template-center">
       {{ output.length.toLocaleString() }}
     </td>
@@ -22,6 +22,11 @@
 </template>
 
 <script>
+import hljs from 'highlight.js/lib/core';
+import css from 'highlight.js/lib/languages/css';
+
+hljs.registerLanguage('css', css);
+
 export default {
   name: 'MinifierTemplate',
   props: {
@@ -44,6 +49,11 @@ export default {
     winner: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    formatted: function () {
+      return hljs.highlight(this.output, { language: 'css' }).value;
     }
   }
 };

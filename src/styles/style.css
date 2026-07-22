@@ -7,6 +7,11 @@
   --button-hover: hsl(from rebeccapurple h s calc(l + 5) / alpha);
   --light-text: hsl(from rebeccapurple h s 30% / alpha);
   --checkmark: hsl(from rebeccapurple calc(h + 180) s l / alpha);
+  --hljs-keyframes: hsl(from rebeccapurple h s calc(l + 12) / alpha);
+  --hljs-comment: hsl(from rebeccapurple h 20% 45% / alpha);
+  --hljs-string: hsl(from rebeccapurple calc(h + 310) s 50% / alpha);
+  --hljs-symbol: hsl(from rebeccapurple calc(h + 80) s 40% / alpha);
+  --hljs-tag: hsl(from rebeccapurple calc(h + 50) s 48% / alpha);
 }
 
 .dark {
@@ -14,6 +19,9 @@
   --color: hsl(from rebeccapurple h s 90% / alpha);
   --toolbar-background: hsl(from rebeccapurple h s 20% / alpha);
   --light-text: hsl(from rebeccapurple h s 70% / alpha);
+  --hljs-string: hsl(from rebeccapurple calc(h + 310) s 70% / alpha);
+  --hljs-symbol: hsl(from rebeccapurple calc(h + 130) 100% l / alpha);
+  --hljs-tag: hsl(from rebeccapurple calc(h + 50) s 48% / alpha);
 }
 
 *,
@@ -41,7 +49,7 @@ button {
 textarea,
 pre,
 code {
-  font-family: Consolas, monospace;
+  font-family: 'B612 Mono', monospace;
 }
 
 pre {
@@ -50,8 +58,88 @@ pre {
   border-radius: 0px 10px 10px;
   margin: 0px;
   padding: 10px;
-  font-size: 12px;
+  font-size: 11px;
   white-space: pre-wrap;
   overflow: auto;
   word-break: break-all;
+}
+
+
+.hljs {
+  color: currentcolor;
+  font-weight: bold;
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  color: var(--hljs-keyframes);
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  color: var(--hljs-keyframes);
+}
+.hljs-number {
+  color: var(--checkmark);
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: var(--light-text);
+}
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  color: var(--hljs-string);
+}
+.hljs-built_in,
+.hljs-symbol {
+  color: var(--hljs-symbol);
+}
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  color: var(--hljs-comment);
+  font-style: italic;
+}
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  color: var(--hljs-tag);
+}
+.hljs-subst {
+}
+.hljs-section {
+  font-weight: bold;
+}
+.hljs-bullet {
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
+}
+.hljs-addition {
+}
+.hljs-deletion {
+}
+.hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
 }
