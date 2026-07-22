@@ -21,7 +21,7 @@
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
-    "csskit": "^0.0.28-canary.eddaa0a071",
+    "csskit": "^3.0.2",
     "cssnano": "^8.0.2",
     "cssnano-preset-advanced": "^8.0.2",
     "csso": "^5.0.5",
