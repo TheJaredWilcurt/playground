@@ -47,6 +47,9 @@ const config = defineConfig({
       string_decoder: 'string_decoder/',
       buffer: 'buffer/'
     }
+  },
+  server: {
+    cors: true
   }
 });
 

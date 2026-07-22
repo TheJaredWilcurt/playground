@@ -4,19 +4,13 @@
       class="playground-form"
       @submit.prevent
     >
-      <label
-        for="input"
-        class="playground-label"
-      >
+      <label class="playground-label">
         Input ({{ input.length.toLocaleString() }})
       </label>
-      <div class="playground-input-container">
-        <textarea
-          v-model="input"
-          id="input"
-          class="playground-input"
-        ></textarea>
-      </div>
+      <CodeMirror
+        v-model="input"
+        class="playground-input-container"
+      />
     </form>
     <table class="playground-table">
       <thead>
@@ -82,6 +76,7 @@ const input = `
 export default {
   name: 'PlayGround',
   components: {
+    CodeMirror: asyncify(() => import('@/components/CodeMirror.vue')),
     MarkDownTable: asyncify(() => import('@/components/MarkdownTable.vue'))
   },
   data: function () {
@@ -196,23 +191,18 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: 20px 0px 40px;
 }
 .playground-label {
   font-weight: bold;
 }
 .playground-input-container {
+  height: 175px;
   background: var(--toolbar-background);
   border-radius: 0px 40px 40px;
   padding: 15px;
-}
-.playground-input {
-  width: 100%;
-  height: 152px;
-  border: 0px;
-  background: transparent;
-  color: var(--color);
+  overflow: auto;
   resize: vertical;
-  outline: 0px;
 }
 .playground-table tr > :nth-child(2) {
   padding: 0px 0px 0px 5px;

@@ -205,7 +205,7 @@ export default {
 }
 .markdown-table-pre {
   max-width: 800px;
-  max-height: 228px;
+  max-height: 260px;
   overflow: auto;
 }
 .markdown-table-button-container {

@@ -42,3 +42,11 @@ is browser specific. So if you go crazy, then the browser will get mad at you.
 
 1. `npm run build` to build the app for distribution
 1. `npm run preview` to manually test the built app
+
+
+* * *
+
+
+### AI Disclosure
+
+* 0% of this project came from AI

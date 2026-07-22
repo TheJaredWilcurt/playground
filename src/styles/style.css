@@ -7,9 +7,11 @@
   --button-hover: hsl(from rebeccapurple h s calc(l + 5) / alpha);
   --light-text: hsl(from rebeccapurple h s 30% / alpha);
   --checkmark: hsl(from rebeccapurple calc(h + 180) s l / alpha);
+  --code-mirror-gutter: hsl(from rebeccapurple h s 85% / alpha);
   --hljs-keyframes: hsl(from rebeccapurple h s calc(l + 12) / alpha);
   --hljs-comment: hsl(from rebeccapurple h 20% 45% / alpha);
   --hljs-number: hsl(from rebeccapurple calc(h + 180) s calc(l - 12) / alpha);
+  --hljs-number-darker: hsl(from var(--hljs-number) h s calc(l - 6) / alpha);
   --hljs-string: hsl(from rebeccapurple calc(h + 310) s 50% / alpha);
   --hljs-symbol: hsl(from rebeccapurple calc(h + 80) s 40% / alpha);
   --hljs-tag: hsl(from rebeccapurple calc(h + 50) calc(s + 5) 43% / alpha);
@@ -22,6 +24,7 @@
   --color: hsl(from rebeccapurple h s 90% / alpha);
   --toolbar-background: hsl(from rebeccapurple h s 20% / alpha);
   --light-text: hsl(from rebeccapurple h s 70% / alpha);
+  --code-mirror-gutter: hsl(from rebeccapurple h s 15% / alpha);
   --hljs-number: hsl(from rebeccapurple calc(h + 180) s l / alpha);
   --hljs-string: hsl(from rebeccapurple calc(h + 310) s 70% / alpha);
   --hljs-symbol: hsl(from rebeccapurple calc(h + 130) 100% l / alpha);
