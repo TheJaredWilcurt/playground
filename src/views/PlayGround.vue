@@ -64,6 +64,7 @@ const minifiers = {
   cleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
   csskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
   csso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
+  esbuild: asyncify(() => import('@/components/minifiers/MinEsbuild.vue')),
   sass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
 };
 
