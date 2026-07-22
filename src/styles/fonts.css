@@ -1,20 +1,31 @@
 @font-face {
-    font-family: 'Consolas';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Consolas'), url('/fonts/consolas.woff') format('woff');
+  font-family: 'B612 Mono';
+  font-style: italic;
+  font-weight: bold;
+  src: url('/fonts/b612mono-bold-italic.woff2') format('woff2');
 }
-
 @font-face {
-  font-family: 'Consolas';
+  font-family: 'B612 Mono';
   font-style: normal;
   font-weight: bold;
-  src: local('Consolas'), url('/fonts/consolas-bold.woff') format('woff');
+  src: url('/fonts/b612mono-bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'B612 Mono';
+  font-style: italic;
+  font-weight: normal;
+  src: url('/fonts/b612mono-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'B612 Mono';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/fonts/b612mono-regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'urbane-rounded';
   font-style: normal;
   font-weight: bold;
-  src: local('urbane-rounded'), url('/fonts/urbane-rounded.woff2') format('woff2');
+  src: url('/fonts/urbane-rounded.woff2') format('woff2');
 }
