@@ -49,6 +49,6 @@ export default {
 
 <style>
 .min-csslop-logo {
-  max-width: 64px;
+  max-width: var(--logo-box-width);
 }
 </style>

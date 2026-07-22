@@ -85,8 +85,8 @@ export default {
 <style>
 .min-cssnano-link {
   display: flex;
-  width: 64px;
-  height: 35px;
+  width: var(--logo-box-width);
+  height: var(--logo-box-height);
   background: var(--light-text);
   border-radius: 0px 10px 10px;
   padding: 0px 3px 0px 4px;

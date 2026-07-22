@@ -13,6 +13,8 @@
   --hljs-string: hsl(from rebeccapurple calc(h + 310) s 50% / alpha);
   --hljs-symbol: hsl(from rebeccapurple calc(h + 80) s 40% / alpha);
   --hljs-tag: hsl(from rebeccapurple calc(h + 50) calc(s + 5) 43% / alpha);
+  --logo-box-width: 64px;
+  --logo-box-height: 35px;
 }
 
 .dark {

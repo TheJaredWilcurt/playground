@@ -26,7 +26,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 35px;
+  height: var(--logo-box-height);
   background: var(--toolbar-background);
   border-radius: 0px 10px 10px;
   color: var(--color);

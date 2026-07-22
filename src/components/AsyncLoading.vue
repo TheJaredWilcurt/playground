@@ -28,7 +28,7 @@ export default {
 }
 .async-loading {
   display: flex;
-  height: 35px;
+  height: var(--logo-box-height);
   align-items: center;
   justify-content: center;
   background: var(--toolbar-background);

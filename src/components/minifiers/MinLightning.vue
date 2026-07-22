@@ -89,7 +89,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 1px;
-  height: 35px;
+  height: var(--logo-box-height);
   background: var(--color);
   border-radius: 0px 10px 10px;
   text-decoration: none;

@@ -63,8 +63,8 @@ export default {
 <style>
 .min-cleancss-link {
   display: flex;
-  height: 35px;
-  width: 64px;
+  height: var(--logo-box-height);
+  width: var(--logo-box-width);
   background: var(--button-fg);
   border-radius: 0px 10px 10px;
   padding: 0px 4px;
