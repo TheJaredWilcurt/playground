@@ -49,4 +49,4 @@ is browser specific. So if you go crazy, then the browser will get mad at you.
 
 ### AI Disclosure
 
-* 0% of this project came from AI
+* No AI of any kind was used at any point in this project.
