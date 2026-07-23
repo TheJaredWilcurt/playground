@@ -56,7 +56,7 @@ export default {
     minify: async function () {
       if (!this.initialized) {
         await initialize({
-          wasmModule: await WebAssembly.compileStreaming(fetch('/playground/node_modules/esbuild-wasm/esbuild.wasm'))
+          wasmModule: await WebAssembly.compileStreaming(fetch('/playground/esbuild.wasm'))
         });
       }
       this.initialized = true;

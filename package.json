@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "prestart": "node ./scripts/copyWasm.js",
+    "prebuild": "node ./scripts/copyWasm.js",
     "start": "npm run dev",
     "dev": "vite",
     "build": "vite build",
