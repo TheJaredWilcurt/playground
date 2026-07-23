@@ -92,7 +92,7 @@ export default {
         (VERSION).padEnd(versionLong),
         ' | ',
         (SIZE).padEnd(sizeLong),
-        ' | Output\n'
+        ' | 🏆  | Output\n'
       ].join('');
       table = table + [
         (':--').padEnd(longest),
@@ -100,7 +100,7 @@ export default {
         (':--:').padEnd(versionLong),
         ' | ',
         (':--').padEnd(sizeLong),
-        ' | :--\n'
+        ' | :-- | :--\n'
       ].join('');
       for (const key in this.output) {
         const data = this.output?.[key] || '';
@@ -112,6 +112,8 @@ export default {
           version.padEnd(versionLong),
           ' | ',
           String(data.length).padEnd(sizeLong),
+          ' | ',
+          (data.length === this.smallest) ? '🏆 ' : '   ',
           ' | `',
           data.replaceAll('\n', '\\n'),
           '`\n'
@@ -141,6 +143,14 @@ export default {
         return key.length;
       });
       return Math.max(...lengths);
+    },
+    smallest: function () {
+      let smallest = Infinity;
+      for (const key in this.output) {
+        const length = this.output[key].length;
+        smallest = Math.min(smallest, length);
+      }
+      return smallest;
     },
     sizeLongest: function () {
       const items = [SIZE];
