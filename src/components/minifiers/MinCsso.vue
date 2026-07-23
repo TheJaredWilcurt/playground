@@ -55,7 +55,7 @@ export default {
   width: 30px;
   height: 30px;
   background: rebeccapurple;
-  border-radius: 0px 8px 8px;
+  border-radius: 0px 5px 5px;
   margin: 0px auto;
   padding: 0px 3px 2px 0px;
   color: #FFF;
