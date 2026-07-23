@@ -90,17 +90,17 @@ export default {
         ('Minifier').padEnd(longest),
         ' | ',
         (VERSION).padEnd(versionLong),
-        ' | ',
+        ' | 🏆  | ',
         (SIZE).padEnd(sizeLong),
-        ' | 🏆  | Output\n'
+        ' | Output\n'
       ].join('');
       table = table + [
         (':--').padEnd(longest),
         ' | ',
         (':--:').padEnd(versionLong),
-        ' | ',
+        ' | :-- | ',
         (':--').padEnd(sizeLong),
-        ' | :-- | :--\n'
+        ' | :--\n'
       ].join('');
       for (const key in this.output) {
         const data = this.output?.[key] || '';
@@ -111,9 +111,9 @@ export default {
           ' | ',
           version.padEnd(versionLong),
           ' | ',
-          String(data.length).padEnd(sizeLong),
-          ' | ',
           (data.length === this.smallest) ? '🏆 ' : '   ',
+          ' | ',
+          String(data.length).padEnd(sizeLong),
           ' | `',
           data.replaceAll('\n', '\\n'),
           '`\n'
