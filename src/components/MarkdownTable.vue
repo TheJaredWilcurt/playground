@@ -53,6 +53,9 @@ import { DoxenAccordion } from 'vue-doxen';
 
 hljs.registerLanguage('markdown', markdown);
 
+const VERSION = 'Version';
+const SIZE = 'Size';
+
 export default {
   name: 'MarkdownTable',
   components: {
@@ -86,9 +89,9 @@ export default {
       table = table + [
         ('Minifier').padEnd(longest),
         ' | ',
-        ('Version').padEnd(versionLong),
+        (VERSION).padEnd(versionLong),
         ' | ',
-        ('Size').padEnd(sizeLong),
+        (SIZE).padEnd(sizeLong),
         ' | Output\n'
       ].join('');
       table = table + [
@@ -140,7 +143,7 @@ export default {
       return Math.max(...lengths);
     },
     sizeLongest: function () {
-      const items = ['Size'];
+      const items = [SIZE];
       for (const key in this.output) {
         const size = String(this.output[key].length);
         items.push(size);
@@ -151,13 +154,14 @@ export default {
       return Math.max(...lengths);
     },
     versionLongest: function () {
-      const items = ['Version'];
+      const items = [VERSION];
       for (const key in this.versions) {
-        const version = String(this.versions[key].length);
+        const version = this.versions[key] || '';
         items.push(version);
       }
+      const v = 'v';
       const lengths = items.map((item) => {
-        return item.length;
+        return v.length + item.length;
       });
       return Math.max(...lengths);
     }
@@ -179,9 +183,11 @@ export default {
   margin-top: 10px;
 }
 .markdown-table-label-button {
+  width: 100%;
   background: transparent;
   border: 0px;
   color: currentcolor;
+  text-align: left;
   cursor: pointer;
   &:hover,
   &:focus {
