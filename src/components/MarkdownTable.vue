@@ -147,7 +147,9 @@ export default {
       let smallest = Infinity;
       for (const key in this.output) {
         const length = this.output[key].length;
-        smallest = Math.min(smallest, length);
+        if (length) {
+          smallest = Math.min(smallest, length);
+        }
       }
       return smallest;
     },
