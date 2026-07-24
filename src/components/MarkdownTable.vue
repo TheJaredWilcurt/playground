@@ -84,7 +84,6 @@ export default {
       const sizeLong = this.sizeLongest;
       const versionLong = this.versionLongest;
       let table = '';
-      table = table + '\n* * *\n\n';
       table = table + '[CSS Minifier Playground](' + location.href + ')\n\n';
       table = table + [
         ('Minifier').padEnd(longest),
@@ -114,9 +113,9 @@ export default {
           (data.length === this.smallest) ? '🏆 ' : '   ',
           ' | ',
           String(data.length).padEnd(sizeLong),
-          ' | `',
-          data.replaceAll('\n', '\\n'),
-          '`\n'
+          ' | ',
+          (data.trim()) ? '`' + data.replaceAll('\n', '\\n').replaceAll('|', '\\|') + '`' : '',
+          '\n'
         ].join('');
       }
       this.table = table;
