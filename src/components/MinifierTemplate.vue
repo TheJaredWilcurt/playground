@@ -15,7 +15,7 @@
         v-if="winner"
         class="minifier-template-checkmark-container"
       >
-        <div class="minifier-template-checkmark"></div>
+        <div class="minifier-template-checkmark" title="Shortest non-zero output"></div>
       </div>
     </td>
   </tr>
