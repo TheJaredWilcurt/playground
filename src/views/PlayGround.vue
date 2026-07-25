@@ -29,7 +29,7 @@
         id="codemirror2"
         class="playground-input-container"
         style="--default-height: 25px"
-        @update:modelValue="setWinners"
+        @update:model-value="setWinners"
       />
     </form>
     <table class="playground-table">

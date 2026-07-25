@@ -73,7 +73,7 @@ export default {
     expected: {
       type: String,
       default: ''
-    },
+    }
   },
   data: function () {
     return {

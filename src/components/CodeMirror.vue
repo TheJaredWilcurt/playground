@@ -10,7 +10,6 @@ import {
   basicSetup,
   EditorView
 } from 'codemirror';
-import { useId } from 'vue';
 
 export default {
   name: 'CodeMirror',
