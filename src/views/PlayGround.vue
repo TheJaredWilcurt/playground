@@ -12,7 +12,24 @@
       </label>
       <CodeMirror
         v-model="input"
+        id="codemirror"
         class="playground-input-container"
+        style="--default-height: 153px"
+      />
+      <label
+        v-if="showExpected"
+        for="codemirror"
+        class="playground-label"
+      >
+        Expected ({{ expected.length.toLocaleString() }})
+      </label>
+      <CodeMirror
+        v-if="showExpected"
+        v-model="expected"
+        id="codemirror2"
+        class="playground-input-container"
+        style="--default-height: 25px"
+        @update:modelValue="setWinners"
       />
     </form>
     <table class="playground-table">
@@ -40,6 +57,7 @@
     <MarkDownTable
       :output="output"
       :versions="versions"
+      :expected="expected"
     />
   </div>
 </template>
@@ -85,6 +103,8 @@ export default {
   data: function () {
     return {
       input,
+      showExpected: false,
+      expected: '',
       output: {},
       versions: {},
       shortestMinifiedLength: 0,
@@ -102,7 +122,11 @@ export default {
       this.winners = [];
       if (this.shortestMinifiedLength) {
         for (const key in this.output) {
-          if (this.output[key].length === this.shortestMinifiedLength) {
+          if (this.showExpected) {
+            if (this.expected.trim() === this.output[key]) {
+              this.winners.push(key);
+            }
+          } else if (this.output[key].length === this.shortestMinifiedLength) {
             this.winners.push(key);
           }
         }
@@ -150,6 +174,13 @@ export default {
       const url = new URL(window.location);
       const value = url.searchParams.get('v');
       const input = url.searchParams.get('i');
+      const expected = url.searchParams.get('e');
+      if (expected?.length) {
+        this.showExpected = true;
+        this.expected = expected;
+        url.searchParams.delete('e');
+        history.replaceState({}, '', url);
+      }
       if (input?.length) {
         url.searchParams.delete('i');
         history.replaceState({}, '', url);
@@ -193,9 +224,10 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 20px 0px 40px;
+  margin: 10px 0px 40px;
 }
 .playground-label {
+  margin-top: 10px;
   font-weight: bold;
 }
 .playground-input-container {

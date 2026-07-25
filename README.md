@@ -22,6 +22,13 @@ You can share links to the site either way (`i` or `v`) to have it prefilled.
 There is a limit to how many characters can be stored in a URL, and the limit
 is browser specific. So if you go crazy, then the browser will get mad at you.
 
+You can also supply an expectation for the output to go along with the input:
+
+* `'e=' + encodeURIComponent('.cow{color:red}')`
+
+This will show another input field for the expectation, and it will mark the
+outputs of the minifiers with a checkbox/trophy if they are an exact match.
+
 
 ## Running locally
 

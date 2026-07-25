@@ -69,7 +69,11 @@ export default {
     versions: {
       type: Object,
       required: true
-    }
+    },
+    expected: {
+      type: String,
+      default: ''
+    },
   },
   data: function () {
     return {
@@ -104,13 +108,20 @@ export default {
       for (const key in this.output) {
         const data = this.output?.[key] || '';
         const version = 'v' + (this.versions?.[key] || '?');
+        let trophy = '   ';
+        if (
+          (this.expected && data === this.expected.trim()) ||
+          (!this.expected && data.length === this.smallest)
+        ) {
+          trophy = '🏆 ';
+        }
         table = [
           table,
           key.padEnd(longest),
           ' | ',
           version.padEnd(versionLong),
           ' | ',
-          (data.length === this.smallest) ? '🏆 ' : '   ',
+          trophy,
           ' | ',
           String(data.length).padEnd(sizeLong),
           ' | ',
@@ -183,6 +194,12 @@ export default {
         this.makeTable();
       },
       deep: true,
+      immediate: true
+    },
+    expected: {
+      handler: function () {
+        this.makeTable();
+      },
       immediate: true
     }
   }

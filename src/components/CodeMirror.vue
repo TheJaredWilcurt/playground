@@ -1,5 +1,5 @@
 <template>
-  <div id="codemirror" class="code-mirror-playground"></div>
+  <div :id="id" class="code-mirror-playground"></div>
 </template>
 
 <script>
@@ -10,10 +10,15 @@ import {
   basicSetup,
   EditorView
 } from 'codemirror';
+import { useId } from 'vue';
 
 export default {
   name: 'CodeMirror',
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     modelValue: {
       type: String,
       default: ''
@@ -40,7 +45,7 @@ export default {
           })
         ]
       });
-      const parent = document.getElementById('codemirror');
+      const parent = document.getElementById(this.id);
       parent.insertBefore(this.mirror.dom, parent.firstChild);
     }
   },
@@ -51,10 +56,10 @@ export default {
 </script>
 
 <style>
-#codemirror.code-mirror-playground {
+.code-mirror-playground.code-mirror-playground {
   .cm-editor {
     min-height: 25px;
-    height: 153px;
+    height: var(--default-height);
     background: var(--toolbar-background);
     border-radius: 0px;
     overflow: auto;
