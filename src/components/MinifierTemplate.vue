@@ -14,8 +14,9 @@
       <div
         v-if="winner"
         class="minifier-template-checkmark-container"
+        title="Shortest non-zero output"
       >
-        <div class="minifier-template-checkmark" title="Shortest non-zero output"></div>
+        <div class="minifier-template-checkmark"></div>
       </div>
     </td>
   </tr>
@@ -69,11 +70,11 @@ export default {
 }
 .minifier-template-checkmark-container {
   position: relative;
-  width: 32px;
+  width: 16px;
   height: 23px;
 }
 .minifier-template-checkmark {
-  transform: scale(0.6) translate(-12px, 32px);
+  transform: scale(0.6) translate(-7px, 32px);
 }
 .minifier-template-checkmark:before,
 .minifier-template-checkmark:after {

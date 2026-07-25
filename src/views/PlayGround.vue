@@ -100,10 +100,7 @@ export default {
     },
     setWinners: function () {
       this.winners = [];
-      if (
-        this.shortestMinifiedLength &&
-        !Object.values(this.output).includes('')
-      ) {
+      if (this.shortestMinifiedLength) {
         for (const key in this.output) {
           if (this.output[key].length === this.shortestMinifiedLength) {
             this.winners.push(key);
@@ -114,9 +111,11 @@ export default {
     setOutput: function (key, value) {
       this.output[key] = value;
       const values = Object.values(this.output);
-      const lengths = values.map((value) => {
-        return value.length;
-      });
+      const lengths = values
+        .map((value) => {
+          return value.length;
+        })
+        .filter(Boolean);
       this.shortestMinifiedLength = Math.min(...lengths);
       this.setWinners();
     },
