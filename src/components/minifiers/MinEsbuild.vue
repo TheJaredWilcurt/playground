@@ -45,23 +45,29 @@ import minifierMixin from '@/helpers/minifierMixin.js';
 export default {
   name: 'MinSass',
   mixins: [minifierMixin],
-  data: function () {
-    return {
-      initialized: false
-    };
-  },
   constants: {
     version
   },
+  data: function () {
+    return {
+      initializing: false,
+      initialized: false
+    };
+  },
   methods: {
     minify: async function () {
+      if (this.initializing) {
+        return;
+      }
       if (!this.initialized) {
+        this.initializing = true;
         const file = '/playground/esbuild-v' + version + '.wasm';
         await initialize({
           wasmModule: await WebAssembly.compileStreaming(fetch(file))
         });
+        this.initialized = true;
+        this.initializing = false;
       }
-      this.initialized = true;
       let start = new Date();
       try {
         const options = {
