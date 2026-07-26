@@ -5,29 +5,35 @@ CSS Minifier Playground - Live output comparison of various minifiers.
 
 ## Site usage
 
-The site supports the following URL Query Param:
+The site supports the following URL Query Params:
 
-* `/?i=.cow%20%7B%0A%20%20color%3A%20%23F00%3B%0A%7D`
+* `i=.cow%20%7B%0A%20%20color%3A%20%23F00%3B%0A%7D`
+* `e=.cow%7Bcolor%3Ared%7D`
 
-It prefills the input CSS textbox. To create that mess you run this in the
-browser's console:
+It prefills the Input CSS textbox and Expected CSS textbox with the content
+provided in the URL. To create that mess of characters use `encodeURIComponent`.
 
-* `'/?i=' + encodeURIComponent('.cow {\n  color: #F00;\n}')`
+**Example JavaScript:**
 
-Copy and paste it at the end of the site url and press enter. It will then
-prefill the value, compress it, and replace it in the URL with the compressed
-version (stored in `/?v=...`).
+```js
+const input = `
+.cow {
+  color: #F00;
+}
+`.trim();
+const expected = '.cow{color:red}';
+const link = [
+  'https://TheJaredWilcurt.com/playground/',
+  '?i=' + encodeURIComponent(input),
+  '&e=' + encodeURIComponent(expected)
+].join('');
+/*
+https://TheJaredWilcurt.com/playground/?i=.cow%20%7B%0A%20%20color%3A%20%23F00%3B%0A%7D&e=.cow%7Bcolor%3Ared%7D
+*/
+```
 
-You can share links to the site either way (`i` or `v`) to have it prefilled.
-There is a limit to how many characters can be stored in a URL, and the limit
-is browser specific. So if you go crazy, then the browser will get mad at you.
-
-You can also supply an expectation for the output to go along with the input:
-
-* `'e=' + encodeURIComponent('.cow{color:red}')`
-
-This will show another input field for the expectation, and it will mark the
-outputs of the minifiers with a checkbox/trophy if they are an exact match.
+For shorter URLs, on page load the `i` and `e` codes automatically get
+compressed and replaced with `v` and `x` params.
 
 
 ## Running locally
@@ -57,3 +63,5 @@ outputs of the minifiers with a checkbox/trophy if they are an exact match.
 ### AI Disclosure
 
 * No AI of any kind was used at any point in this project.
+
+A full list of dependencies can be seen in the `package.json`.
