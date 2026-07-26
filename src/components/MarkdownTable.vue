@@ -73,6 +73,10 @@ export default {
     expected: {
       type: String,
       default: ''
+    },
+    showExpected: {
+      type: Boolean,
+      default: false
     }
   },
   data: function () {
@@ -110,8 +114,8 @@ export default {
         const version = 'v' + (this.versions?.[key] || '?');
         let trophy = '   ';
         if (
-          (this.expected && data === this.expected.trim()) ||
-          (!this.expected && data.length === this.smallest)
+          (this.showExpected && data === this.expected?.trim()) ||
+          (!this.showExpected && data.length === this.smallest)
         ) {
           trophy = '🏆 ';
         }
@@ -157,7 +161,7 @@ export default {
     smallest: function () {
       let smallest = Infinity;
       for (const key in this.output) {
-        const length = this.output[key].length;
+        const length = this.output[key]?.length;
         if (length) {
           smallest = Math.min(smallest, length);
         }
@@ -167,7 +171,7 @@ export default {
     sizeLongest: function () {
       const items = [SIZE];
       for (const key in this.output) {
-        const size = String(this.output[key].length);
+        const size = String(this.output[key]?.length || 0);
         items.push(size);
       }
       const lengths = items.map((item) => {
@@ -197,6 +201,12 @@ export default {
       immediate: true
     },
     expected: {
+      handler: function () {
+        this.makeTable();
+      },
+      immediate: true
+    },
+    showExpected: {
       handler: function () {
         this.makeTable();
       },

@@ -4,6 +4,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :showExpected="showExpected"
     :winner="winner"
   >
     <td>
@@ -72,8 +73,8 @@ export default {
       let start = new Date();
       try {
         this.output = minify(this.input);
-      } catch {
-        /**/
+      } catch (error) {
+        this.errorCatcher(error);
       }
       let end = new Date();
       this.duration = end - start;

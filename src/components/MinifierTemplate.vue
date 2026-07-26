@@ -14,7 +14,7 @@
       <div
         v-if="winner"
         class="minifier-template-checkmark-container"
-        title="Shortest non-zero output"
+        :title="showExpected ? 'Matches expectation' : 'Shortest non-zero output'"
       >
         <div class="minifier-template-checkmark"></div>
       </div>
@@ -42,6 +42,10 @@ export default {
     },
     output: {
       type: String,
+      required: true
+    },
+    showExpected: {
+      type: Boolean,
       required: true
     },
     time: {

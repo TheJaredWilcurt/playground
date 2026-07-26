@@ -39,3 +39,16 @@ export const formatMs = function (duration) {
   const time = prettyMilliseconds(duration, options);
   return time;
 };
+
+export const extractError = function (error) {
+  if (typeof(error) === 'string') {
+    return error;
+  }
+  if (error.toString) {
+    return error.toString();
+  }
+  if (error?.message) {
+    return String(error.mesage);
+  }
+  return String(error);
+};

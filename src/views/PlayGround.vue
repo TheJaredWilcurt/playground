@@ -21,7 +21,7 @@
         for="codemirror"
         class="playground-label"
       >
-        Expected ({{ expected.length.toLocaleString() }})
+        Expected Output ({{ expected.length.toLocaleString() }})
       </label>
       <CodeMirror
         v-if="showExpected"
@@ -32,6 +32,7 @@
         @update:model-value="setWinners"
       />
     </form>
+
     <table class="playground-table">
       <thead>
         <tr>
@@ -47,6 +48,8 @@
           v-for="(minifier, key) in minifiers"
           :is="minifier"
           :input="input"
+          :showErrors="showErrors"
+          :showExpected="showExpected"
           :winner="winners.includes(key)"
           @minified="setOutput(key, $event)"
           @version="setVersion(key, $event)"
@@ -54,10 +57,32 @@
         />
       </tbody>
     </table>
+
+    <div class="playground-controls">
+      <label>
+        <input
+          v-model="showExpected"
+          class="playground-checkbox"
+          type="checkbox"
+        />
+        Show Expected Output
+      </label>
+
+      <label>
+        <input
+          v-model="showErrors"
+          class="playground-checkbox"
+          type="checkbox"
+        />
+        Show Errors
+      </label>
+    </div>
+
     <MarkDownTable
       :output="output"
       :versions="versions"
       :expected="expected"
+      :showExpected="showExpected"
     />
   </div>
 </template>
@@ -104,6 +129,7 @@ export default {
     return {
       input,
       showExpected: false,
+      showErrors: false,
       expected: '',
       output: {},
       versions: {},
@@ -126,7 +152,7 @@ export default {
             if (this.expected.trim() === this.output[key]) {
               this.winners.push(key);
             }
-          } else if (this.output[key].length === this.shortestMinifiedLength) {
+          } else if (this.output[key]?.length === this.shortestMinifiedLength) {
             this.winners.push(key);
           }
         }
@@ -136,10 +162,10 @@ export default {
       this.output[key] = value;
       const values = Object.values(this.output);
       const lengths = values
+        .filter(Boolean)
         .map((value) => {
           return value.length;
-        })
-        .filter(Boolean);
+        });
       this.shortestMinifiedLength = Math.min(...lengths);
       this.setWinners();
     },
@@ -162,11 +188,14 @@ export default {
       return decodeURIComponent(escape(binary));
     },
     setUrlParams: function () {
+      const url = new URL(window.location);
       let value = '';
       if (this.input) {
         value = this.urlEncode(this.input);
       }
-      const url = new URL(window.location);
+      if (this.showExpected) {
+        url.searchParams.set('x', this.urlEncode(this.expected));
+      }
       url.searchParams.set('v', value);
       history.replaceState({}, '', url);
     },
@@ -175,11 +204,15 @@ export default {
       const value = url.searchParams.get('v');
       const input = url.searchParams.get('i');
       const expected = url.searchParams.get('e');
-      if (expected?.length) {
-        this.showExpected = true;
-        this.expected = expected;
+      const expectation = url.searchParams.get('x');
+      if (typeof(expected) === 'string') {
         url.searchParams.delete('e');
         history.replaceState({}, '', url);
+        this.showExpected = true;
+        this.expected = expected;
+      } else if (typeof(expectation) === 'string') {
+        this.showExpected = true;
+        this.expected = this.urlDecode(expectation);
       }
       if (input?.length) {
         url.searchParams.delete('i');
@@ -200,6 +233,12 @@ export default {
       if (!value) {
         this.winners = [];
       }
+      this.setUrlParams();
+    },
+    showExpected: function () {
+      this.setWinners();
+    },
+    expected: function () {
       this.setUrlParams();
     }
   },
@@ -240,5 +279,23 @@ export default {
 }
 .playground-table td:nth-child(2) {
   color: var(--light-text);
+}
+.playground-controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--light-text);
+}
+.playground-checkbox {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rebeccapurple;
+  background: var(--toolbar-background);
+  border-radius: 0px 5px 5px;
+  vertical-align: text-bottom;
+}
+.playground-checkbox:checked {
+  background: rebeccapurple;
 }
 </style>

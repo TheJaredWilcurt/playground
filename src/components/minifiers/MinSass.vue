@@ -3,6 +3,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :showExpected="showExpected"
     :winner="winner"
   >
     <td>
@@ -61,8 +62,8 @@ export default {
       try {
         const result = await compileStringAsync(this.input, options);
         this.output = result.css;
-      } catch {
-        /**/
+      } catch (error) {
+        this.errorCatcher(error);
       }
       let end = new Date();
       this.duration = end - start;

@@ -3,6 +3,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :showExpected="showExpected"
     :winner="winner"
   >
     <td class="min-lightning-logo-td">
@@ -68,8 +69,8 @@ export default {
           sourceMap: false
         });
         this.output = new TextDecoder().decode(code);
-      } catch {
-        /**/
+      } catch (error) {
+        this.errorCatcher(error);
       }
       let end = new Date();
       this.duration = end - start;

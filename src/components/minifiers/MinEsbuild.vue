@@ -3,6 +3,7 @@
     :version="version"
     :output="output"
     :time="time"
+    :showExpected="showExpected"
     :winner="winner"
   >
     <td>
@@ -77,8 +78,8 @@ export default {
         const code = result.outputFiles[0].contents;
         const minified = new TextDecoder().decode(code);
         this.output = (minified || '').trim();
-      } catch {
-        /**/
+      } catch (error) {
+        this.errorCatcher(error);
       }
       let end = new Date();
       this.duration = end - start;

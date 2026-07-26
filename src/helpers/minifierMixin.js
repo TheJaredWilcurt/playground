@@ -1,4 +1,7 @@
-import { formatMs } from '@/helpers/helpers.js';
+import {
+  extractError,
+  formatMs
+} from '@/helpers/helpers.js';
 
 import MinifierTemplate from '@/components/MinifierTemplate.vue';
 
@@ -10,6 +13,14 @@ export default {
     input: {
       type: String,
       default: ''
+    },
+    showErrors: {
+      type: Boolean,
+      default: false
+    },
+    showExpected: {
+      type: Boolean,
+      default: false
     },
     winner: {
       type: Boolean,
@@ -26,12 +37,32 @@ export default {
       duration: 0
     };
   },
+  methods: {
+    errorCatcher: function (error) {
+      if (this.showErrors) {
+        this.output = extractError(error);
+      }
+    }
+  },
   computed: {
     time: function () {
       return formatMs(this.duration);
     }
   },
   watch: {
+    showErrors: {
+      handler: function () {
+        this.output = '';
+        this.minify();
+      },
+      immediate: true
+    },
+    showExpected: {
+      handler: function () {
+        this.minify();
+      },
+      immediate: true
+    },
     input: {
       handler: function () {
         this.minify();
