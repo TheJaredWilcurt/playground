@@ -21,7 +21,7 @@ export const asyncify = function (loader) {
     // Component to show if async component times out
     errorComponent: AsyncError,
     // Time to wait before showing error component
-    timeout: 30 * 1000
+    timeout: 45 * 1000
   });
 };
 

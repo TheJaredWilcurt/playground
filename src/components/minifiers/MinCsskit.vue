@@ -1,12 +1,5 @@
 <template>
-  <MinifierTemplate
-    :fullVersion="fullVersion"
-    :version="version"
-    :output="output"
-    :time="time"
-    :showExpected="showExpected"
-    :winner="winner"
-  >
+  <MinifierTemplate v-bind="minifierTemplateProps">
     <td>
       <a
         class="min-csskit-link"
@@ -78,6 +71,7 @@ export default {
       }
       let end = new Date();
       this.duration = end - start;
+      this.loading = false;
     }
   }
 };

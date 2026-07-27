@@ -5,11 +5,23 @@
       class="minifier-template-center"
       :title="'v' + (fullVersion || version)"
     >v{{ version }}</td>
+
     <td class="minifier-template-center">{{ time }}</td>
-    <td><pre class="minifier-template-pre"><code v-html="formatted"></code></pre></td>
+
+    <td
+      v-if="loading"
+      class="minifier-template-center"
+    >
+      <LoadingDots />
+    </td>
+    <td v-else>
+      <pre class="minifier-template-pre"><code v-html="formatted"></code></pre>
+    </td>
+
     <td class="minifier-template-center">
       {{ output.length.toLocaleString() }}
     </td>
+
     <td>
       <div
         v-if="winner"
@@ -27,10 +39,15 @@
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
 
+import LoadingDots from '@/components/LoadingDots.vue';
+
 hljs.registerLanguage('css', css);
 
 export default {
   name: 'MinifierTemplate',
+  components: {
+    LoadingDots
+  },
   props: {
     fullVersion: {
       type: String,
@@ -47,6 +64,10 @@ export default {
     showExpected: {
       type: Boolean,
       required: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
     },
     time: {
       type: String,

@@ -1,11 +1,5 @@
 <template>
-  <MinifierTemplate
-    :version="version"
-    :output="output"
-    :time="time"
-    :showExpected="showExpected"
-    :winner="winner"
-  >
+  <MinifierTemplate v-bind="minifierTemplateProps">
     <td class="min-lightning-logo-td">
       <a
         class="min-lightning-link"
@@ -74,6 +68,7 @@ export default {
       }
       let end = new Date();
       this.duration = end - start;
+      this.loading = false;
     }
   }
 };

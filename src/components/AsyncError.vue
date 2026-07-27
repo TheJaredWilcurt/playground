@@ -5,7 +5,7 @@
       colspan="4"
     >
       <span
-        v-text="'[ ERROR LOADING MINIFIER ]'.replaceAll(' ', '&nbsp;')"
+        v-text="'[ Minifier loading may have failed, refresh to try again ]'.replaceAll(' ', '&nbsp;')"
         class="async-error-error"
       ></span>
     </td>

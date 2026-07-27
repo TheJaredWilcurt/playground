@@ -33,6 +33,7 @@ export default {
   ],
   data: function () {
     return {
+      loading: true,
       output: '',
       duration: 0
     };
@@ -47,6 +48,17 @@ export default {
   computed: {
     time: function () {
       return formatMs(this.duration);
+    },
+    minifierTemplateProps: function () {
+      return {
+        fullVersion: this.fullVersion,
+        version: this.version,
+        output: this.output,
+        showExpected: this.showExpected,
+        loading: this.loading,
+        time: this.time,
+        winner: this.winner
+      };
     }
   },
   watch: {

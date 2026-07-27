@@ -195,6 +195,8 @@ export default {
       }
       if (this.showExpected) {
         url.searchParams.set('x', this.urlEncode(this.expected));
+      } else {
+        url.searchParams.delete('x');
       }
       url.searchParams.set('v', value);
       history.replaceState({}, '', url);
@@ -237,6 +239,7 @@ export default {
     },
     showExpected: function () {
       this.setWinners();
+      this.setUrlParams();
     },
     expected: function () {
       this.setUrlParams();

@@ -1,11 +1,5 @@
 <template>
-  <MinifierTemplate
-    :version="version"
-    :output="output"
-    :time="time"
-    :showExpected="showExpected"
-    :winner="winner"
-  >
+  <MinifierTemplate v-bind="minifierTemplateProps">
     <td>
       <a
         class="min-sass-link"
@@ -67,6 +61,7 @@ export default {
       }
       let end = new Date();
       this.duration = end - start;
+      this.loading = false;
     }
   }
 };
