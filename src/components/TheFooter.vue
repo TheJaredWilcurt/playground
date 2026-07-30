@@ -15,6 +15,9 @@
         href="https://www.keithcirkel.co.uk/css-minify-tests"
       >css-minify-tests</a>
     </p>
+    <p v-if="lastUpdated">
+      Last updated {{ lastUpdated }}
+    </p>
     <p>
       MIT Licensed
     </p>
@@ -29,6 +32,7 @@ export default {
   name: 'TheFooter',
   data: function () {
     return {
+      lastUpdated: undefined,
       year: 2026
     };
   },
@@ -45,7 +49,9 @@ export default {
         const result = await response.json();
         const updatedAt = result?.updated_at;
         if (updatedAt) {
-          this.year = (new Date(updatedAt)).getFullYear();
+          const dateTime = new Date(updatedAt);
+          this.year = dateTime.getFullYear();
+          this.lastUpdated = dateTime.toLocaleDateString();
         }
       } catch (error) {
         console.error(error.message);
