@@ -48,8 +48,13 @@ export default {
 
         const result = await response.json();
         const updatedAt = result?.updated_at;
-        if (updatedAt) {
-          const dateTime = new Date(updatedAt);
+        const pushedAt = result?.pushed_at;
+        let latest = updatedAt;
+        if (pushedAt > updatedAt) {
+          latest = pushedAt;
+        }
+        if (latest) {
+          const dateTime = new Date(latest);
           this.year = dateTime.getFullYear();
           this.lastUpdated = dateTime.toLocaleDateString();
         }
