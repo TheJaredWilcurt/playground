@@ -21,7 +21,7 @@
     <p>
       MIT Licensed
     </p>
-    <p>
+    <p class="the-footer-last-p">
       &copy;{{ year }}
     </p>
   </footer>
@@ -71,12 +71,19 @@ export default {
 
 <style>
 .the-footer {
-  text-align: center;
+  background: linear-gradient(in oklch, var(--background) 0% 0%, var(--toolbar-background));
   margin-top: 50px;
+  margin-bottom: 0px;
+  padding: 0px;
   font-size: 12px;
   color: var(--hljs-tag);
+  text-align: center;
 }
 .the-footer-link {
   color: var(--light-text);
+}
+.the-footer-last-p {
+  margin-bottom: 0px;
+  padding-bottom: 200px;
 }
 </style>

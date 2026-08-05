@@ -37,9 +37,14 @@
   box-sizing: border-box;
 }
 
+html {
+  background: var(--toolbar-background);
+}
+
 body {
-  background: var(--background);
-  margin-bottom: 100px;
+  background: linear-gradient(in oklch, var(--toolbar-background) 0 60px, var(--background) 0 100%);
+  margin: 0px;
+  padding: 0px;
   color: var(--color);
   font-family: 'Dinish Condensed', sans-serif;
 }
