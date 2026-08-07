@@ -62,6 +62,10 @@ export default {
     DoxenAccordion
   },
   props: {
+    input: {
+      type: String,
+      default: ''
+    },
     output: {
       type: Object,
       required: true
@@ -137,7 +141,7 @@ export default {
     },
     copy: async function () {
       try {
-        await navigator.clipboard.writeText(this.table);
+        await navigator.clipboard.writeText(this.inputExpectedTable);
         this.copied = true;
         setTimeout(() => {
           this.copied = false;
@@ -145,11 +149,31 @@ export default {
       } catch (error) {
         console.error(error.message);
       }
+    },
+    wrapInCssCodeFence: function (value) {
+      return [
+        '```css',
+        value,
+        '```'
+      ].join('\n');
     }
   },
   computed: {
+    inputExpectedTable: function () {
+      if (this.showExpected) {
+        const input = this.wrapInCssCodeFence(this.input);
+        const expected = this.wrapInCssCodeFence(this.expected);
+        return [
+          '```md\n#\n```',
+          input,
+          expected,
+          this.table
+        ].join('\n\n');
+      }
+      return this.table;
+    },
     formatted: function () {
-      return hljs.highlight(this.table.trim(), { language: 'markdown' }).value;
+      return hljs.highlight(this.inputExpectedTable.trim(), { language: 'markdown' }).value;
     },
     longest: function () {
       const keys = Object.keys(this.output);

@@ -79,6 +79,7 @@
     </div>
 
     <MarkDownTable
+      :input="input"
       :output="output"
       :versions="versions"
       :expected="expected"
