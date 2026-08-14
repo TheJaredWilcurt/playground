@@ -24,12 +24,12 @@
       Test Description
     </label>
     <CodeMirror
-      :modelValue="description"
       id="test-description"
+      :modelValue="description"
       class="test-description-input-container"
       language="md"
       style="--default-height: calc(25px * 3)"
-      @update:modelValue="$emit('update:description', $event)"
+      @update:model-value="$emit('update:description', $event)"
     />
   </form>
 </template>
