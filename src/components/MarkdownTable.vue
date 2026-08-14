@@ -8,7 +8,12 @@
         class="markdown-table-label"
         for="markdown-table"
       >
-        Markdown table
+        <template v-if="showTestDescription">
+          Issue template
+        </template>
+        <template v-else>
+          Markdown table
+        </template>
         <span
           class="markdown-table-pointer"
           :class="{ 'markdown-table-pointer-rotate': show }"
@@ -40,6 +45,14 @@
         >
           Copy
         </button>
+        <a
+          v-if="showTestDescription"
+          class="markdown-table-link"
+          :href="issueLink"
+          target="_blank"
+        >
+          Create Issue
+        </a>
       </div>
     </DoxenAccordion>
   </div>
@@ -81,6 +94,18 @@ export default {
     showExpected: {
       type: Boolean,
       default: false
+    },
+    showTestDescription: {
+      type: Boolean,
+      default: false
+    },
+    testTitle: {
+      type: String,
+      default: ''
+    },
+    testDescription: {
+      type: String,
+      default: ''
     }
   },
   data: function () {
@@ -95,8 +120,11 @@ export default {
       const longest = this.longest;
       const sizeLong = this.sizeLongest;
       const versionLong = this.versionLongest;
+      const link = location.href
+        .replace('http://localhost:4173', 'https://TheJaredWilcurt.com')
+        .replace('http://localhost:5173', 'https://TheJaredWilcurt.com');
       let table = '';
-      table = table + '[CSS Minifier Playground](' + location.href + ')\n\n';
+      table = table + '[CSS Minifier Playground](' + link + ')\n\n';
       table = table + [
         ('Minifier').padEnd(longest),
         ' | ',
@@ -141,7 +169,7 @@ export default {
     },
     copy: async function () {
       try {
-        await navigator.clipboard.writeText(this.inputExpectedTable);
+        await navigator.clipboard.writeText(this.allMarkdown);
         this.copied = true;
         setTimeout(() => {
           this.copied = false;
@@ -156,24 +184,45 @@ export default {
         value,
         '```'
       ].join('\n');
+    },
+    wrapInMarkdownCodeFence: function (value) {
+      return [
+        '```md',
+        value,
+        '```'
+      ].join('\n');
     }
   },
   computed: {
-    inputExpectedTable: function () {
-      if (this.showExpected) {
-        const input = this.wrapInCssCodeFence(this.input);
-        const expected = this.wrapInCssCodeFence(this.expected);
-        return [
-          '```md\n#\n```',
-          input,
-          expected,
-          this.table
-        ].join('\n\n');
+    allMarkdown: function () {
+      let markdown = [];
+      if (this.showTestDescription) {
+        const description = this.wrapInMarkdownCodeFence([
+          this.testTitle,
+          this.testDescription
+        ].join('\n\n'));
+        markdown.push(description);
       }
-      return this.table;
+      const input = this.wrapInCssCodeFence(this.input);
+      markdown.push(input);
+      if (this.showExpected) {
+        const expected = this.wrapInCssCodeFence(this.expected);
+        markdown.push(expected);
+      }
+      markdown.push(this.table);
+      return markdown.join('\n\n');
     },
     formatted: function () {
-      return hljs.highlight(this.inputExpectedTable.trim(), { language: 'markdown' }).value;
+      return hljs.highlight(this.allMarkdown.trim(), { language: 'markdown' }).value;
+    },
+    issueLink: function () {
+      const title = 'Test: ' + this.testTitle.replace('# ', '');
+      const body = this.allMarkdown;
+      return [
+        'https://github.com/keithamus/css-minify-tests/issues/new',
+        '?title=' + encodeURIComponent(title),
+        '&body=' + encodeURIComponent(body)
+      ].join('');
     },
     longest: function () {
       const keys = Object.keys(this.output);
@@ -236,6 +285,11 @@ export default {
       },
       immediate: true
     }
+  },
+  created: function () {
+    if (this.showTestDescription) {
+      this.show = true;
+    }
   }
 };
 </script>
@@ -281,7 +335,7 @@ export default {
 }
 .markdown-table-pre {
   background: transparent;
-  max-width: 800px;
+  max-width: 650px;
   max-height: 250px;
   overflow: auto;
 }
@@ -303,7 +357,8 @@ export default {
 .markdown-table-fade-leave-to {
   opacity: 0;
 }
-.markdown-table-button {
+.markdown-table-button,
+.markdown-table-link {
   display: flex;
   align-items: end;
   border: 0px;
@@ -315,6 +370,15 @@ export default {
   text-transform: uppercase;
   &:focus-visible {
     outline: 1px dotted currentcolor;
+  }
+}
+.markdown-table-link {
+  background: var(--button-bg);
+  color: var(--button-fg);
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    background: var(--button-hover);
   }
 }
 </style>

@@ -5,6 +5,7 @@
 <script>
 import { acceptCompletion } from '@codemirror/autocomplete';
 import { css as codeMirrorCss } from '@codemirror/lang-css';
+import { markdown as codeMirrorMd } from '@codemirror/lang-markdown';
 import { keymap } from '@codemirror/view';
 import {
   basicSetup,
@@ -21,16 +22,25 @@ export default {
     modelValue: {
       type: String,
       default: ''
+    },
+    language: {
+      type: String,
+      default: 'css'
     }
   },
   emits: ['update:modelValue'],
   methods: {
     initializeCodeMirror: function () {
+      const languageMap = {
+        css: codeMirrorCss,
+        md: codeMirrorMd
+      };
+
       this.mirror = new EditorView({
         doc: this.modelValue,
         extensions: [
           basicSetup,
-          codeMirrorCss(),
+          languageMap[this.language](),
           keymap.of([
             {
               key: 'Tab',
@@ -88,6 +98,7 @@ export default {
   .cm-activeLineGutter { background: var(--background); }
   .cm-activeLine { background-color: var(--code-mirror-gutter); }
   .cm-specialChar { color: var(--hljs-number); }
+  .\00037C5 { color: var(--hljs-tag); }
   .\00037Cb { color: var(--hljs-number-darker); }
   .\00037Cc { color: var(--light-text); }
   .\00037Cd { color: var(--hljs-number); }

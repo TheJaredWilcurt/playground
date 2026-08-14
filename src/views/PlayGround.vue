@@ -18,7 +18,7 @@
       />
       <label
         v-if="showExpected"
-        for="codemirror"
+        for="codemirror2"
         class="playground-label"
       >
         Expected Output ({{ expected.length.toLocaleString() }})
@@ -59,31 +59,36 @@
     </table>
 
     <div class="playground-controls">
-      <label>
-        <input
-          v-model="showExpected"
-          class="playground-checkbox"
-          type="checkbox"
-        />
-        Show Expected Output
-      </label>
-
-      <label>
-        <input
-          v-model="showErrors"
-          class="playground-checkbox"
-          type="checkbox"
-        />
-        Show Errors
-      </label>
+      <CheckBox
+        v-model="showExpected"
+        label="Show Expected Output"
+      />
+      <CheckBox
+        v-model="showErrors"
+        label="Show Errors"
+      />
+      <CheckBox
+        v-model="showTestDescription"
+        label="Show Test Description"
+      />
     </div>
 
-    <MarkDownTable
+    <TestDescription
+      v-show="showTestDescription"
+      v-model:title="testTitle"
+      v-model:description="testDescription"
+      class="playground-form"
+    />
+
+    <MarkdownTable
       :input="input"
       :output="output"
       :versions="versions"
       :expected="expected"
       :showExpected="showExpected"
+      :showTestDescription="showTestDescription"
+      :testTitle="testTitle"
+      :testDescription="testDescription"
     />
   </div>
 </template>
@@ -123,14 +128,19 @@ const input = `
 export default {
   name: 'PlayGround',
   components: {
+    CheckBox: asyncify(() => import('@/components/CheckBox.vue')),
     CodeMirror: asyncify(() => import('@/components/CodeMirror.vue')),
-    MarkDownTable: asyncify(() => import('@/components/MarkdownTable.vue'))
+    MarkdownTable: asyncify(() => import('@/components/MarkdownTable.vue')),
+    TestDescription: asyncify(() => import('@/components/TestDescription.vue'))
   },
   data: function () {
     return {
       input,
       showExpected: false,
       showErrors: false,
+      showTestDescription: false,
+      testTitle: '',
+      testDescription: '',
       expected: '',
       output: {},
       versions: {},
@@ -199,6 +209,13 @@ export default {
       } else {
         url.searchParams.delete('x');
       }
+      if (this.showTestDescription) {
+        url.searchParams.set('t', this.urlEncode(this.testTitle));
+        url.searchParams.set('d', this.urlEncode(this.testDescription));
+      } else {
+        url.searchParams.delete('t');
+        url.searchParams.delete('d');
+      }
       url.searchParams.set('v', value);
       history.replaceState({}, '', url);
     },
@@ -208,6 +225,8 @@ export default {
       const input = url.searchParams.get('i');
       const expected = url.searchParams.get('e');
       const expectation = url.searchParams.get('x');
+      const title = url.searchParams.get('t');
+      const description = url.searchParams.get('d');
       if (typeof(expected) === 'string') {
         url.searchParams.delete('e');
         history.replaceState({}, '', url);
@@ -217,6 +236,16 @@ export default {
         this.showExpected = true;
         this.expected = this.urlDecode(expectation);
       }
+
+      if (typeof(title) === 'string') {
+        this.showTestDescription = true;
+        this.testTitle = this.urlDecode(title);
+      }
+      if (typeof(description) === 'string') {
+        this.showTestDescription = true;
+        this.testDescription = this.urlDecode(description);
+      }
+
       if (input?.length) {
         url.searchParams.delete('i');
         history.replaceState({}, '', url);
@@ -243,6 +272,15 @@ export default {
       this.setUrlParams();
     },
     expected: function () {
+      this.setUrlParams();
+    },
+    showTestDescription: function () {
+      this.setUrlParams();
+    },
+    testTitle: function () {
+      this.setUrlParams();
+    },
+    testDescription: function () {
       this.setUrlParams();
     }
   },
@@ -289,17 +327,5 @@ export default {
   gap: 1rem;
   margin-top: 1rem;
   color: var(--light-text);
-}
-.playground-checkbox {
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border: 2px solid rebeccapurple;
-  background: var(--toolbar-background);
-  border-radius: 0px 5px 5px;
-  vertical-align: text-bottom;
-}
-.playground-checkbox:checked {
-  background: rebeccapurple;
 }
 </style>
