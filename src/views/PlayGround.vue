@@ -106,8 +106,8 @@ import { asyncify } from '@/helpers/helpers.js';
 const minifiers = {
   csslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
   lightning: asyncify(() => import('@/components/minifiers/MinLightning.vue')),
-  cssnano: asyncify(() => import('@/components/minifiers/MinCssnano.vue')),
   cleancss: asyncify(() => import('@/components/minifiers/MinCleancss.vue')),
+  cssnano: asyncify(() => import('@/components/minifiers/MinCssnano.vue')),
   csskit: asyncify(() => import('@/components/minifiers/MinCsskit.vue')),
   csso: asyncify(() => import('@/components/minifiers/MinCsso.vue')),
   esbuild: asyncify(() => import('@/components/minifiers/MinEsbuild.vue')),
