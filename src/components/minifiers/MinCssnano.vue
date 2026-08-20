@@ -35,6 +35,23 @@ import minifierMixin from '@/helpers/minifierMixin.js';
 
 const version = dependencies.cssnano.replace('^', '');
 
+function createPluginsCache () {
+  const nanoPlugins = cssnanoPresetAdvanced().plugins;
+  const postcssPlugins = [];
+  for (const plugin of nanoPlugins) {
+    const [processor, options] = plugin;
+    if (
+      typeof options === 'undefined' ||
+      (typeof options === 'object' && !options.exclude) ||
+      (typeof options === 'boolean' && options === true)
+    ) {
+      postcssPlugins.push(processor(options));
+    }
+  }
+  return postcssPlugins;
+}
+const postcssPlugins = createPluginsCache();
+
 export default {
   name: 'MinCssnano',
   mixins: [minifierMixin],
@@ -43,18 +60,6 @@ export default {
   },
   methods: {
     runner: function (input) {
-      const nanoPlugins = cssnanoPresetAdvanced().plugins;
-      const postcssPlugins = [];
-      for (const plugin of nanoPlugins) {
-        const [processor, options] = plugin;
-        if (
-          typeof options === 'undefined' ||
-          (typeof options === 'object' && !options.exclude) ||
-          (typeof options === 'boolean' && options === true)
-        ) {
-          postcssPlugins.push(processor(options));
-        }
-      }
       return new Promise((resolve, reject) => {
         postcss(postcssPlugins)
           .process(input, { from: './playground.css' })
