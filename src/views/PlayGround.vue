@@ -75,6 +75,7 @@
 
     <TestDescription
       v-show="showTestDescription"
+      v-model:category="testCategory"
       v-model:title="testTitle"
       v-model:description="testDescription"
       class="playground-form"
@@ -87,6 +88,7 @@
       :expected="expected"
       :showExpected="showExpected"
       :showTestDescription="showTestDescription"
+      :testCategory="testCategory"
       :testTitle="testTitle"
       :testDescription="testDescription"
     />
@@ -102,6 +104,7 @@ import {
 } from 'fflate';
 
 import { asyncify } from '@/helpers/helpers.js';
+import { categories } from '@/helpers/categories.js';
 
 const minifiers = {
   csslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
@@ -139,6 +142,7 @@ export default {
       showExpected: false,
       showErrors: false,
       showTestDescription: false,
+      testCategory: '',
       testTitle: '',
       testDescription: '',
       expected: '',
@@ -210,9 +214,13 @@ export default {
         url.searchParams.delete('x');
       }
       if (this.showTestDescription) {
+        if (this.encodedCategory > 0) {
+          url.searchParams.set('c', String(this.encodedCategory));
+        }
         url.searchParams.set('t', this.urlEncode(this.testTitle));
         url.searchParams.set('d', this.urlEncode(this.testDescription));
       } else {
+        url.searchParams.delete('c');
         url.searchParams.delete('t');
         url.searchParams.delete('d');
       }
@@ -225,6 +233,7 @@ export default {
       const input = url.searchParams.get('i');
       const expected = url.searchParams.get('e');
       const expectation = url.searchParams.get('x');
+      const categoryIndex = url.searchParams.get('c');
       const title = url.searchParams.get('t');
       const description = url.searchParams.get('d');
       if (typeof(expected) === 'string') {
@@ -237,6 +246,9 @@ export default {
         this.expected = this.urlDecode(expectation);
       }
 
+      if (typeof(categoryIndex) === 'string') {
+        this.testCategory = categories[categoryIndex] || '';
+      }
       if (typeof(title) === 'string') {
         this.showTestDescription = true;
         this.testTitle = this.urlDecode(title);
@@ -258,6 +270,11 @@ export default {
   computed: {
     minifiers: function () {
       return minifiers;
+    },
+    encodedCategory: function () {
+      return categories.findIndex((category) => {
+        return category === this.testCategory;
+      });
     }
   },
   watch: {
@@ -275,6 +292,9 @@ export default {
       this.setUrlParams();
     },
     showTestDescription: function () {
+      this.setUrlParams();
+    },
+    testCategory: function () {
       this.setUrlParams();
     },
     testTitle: function () {

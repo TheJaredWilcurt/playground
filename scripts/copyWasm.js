@@ -3,10 +3,7 @@ import {
   readdirSync,
   unlinkSync
 } from 'node:fs';
-import {
-  dirname,
-  join
-} from 'node:path';
+import { join } from 'node:path';
 
 import { version } from 'esbuild-wasm';
 

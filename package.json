@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "npm run build && vite preview --port 4173",
-    "lint": "eslint --ext .js,.vue src vite.config.js eslint.config.js",
+    "get-categories": "node ./scripts/getCategories.js",
+    "lint": "eslint --ext .js,.vue src scripts vite.config.js eslint.config.js",
     "fix": "npm run lint -- --fix",
     "proto": "proto pin node latest --resolve --tool-native && git status"
   },

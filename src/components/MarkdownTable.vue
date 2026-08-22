@@ -99,6 +99,10 @@ export default {
       type: Boolean,
       default: false
     },
+    testCategory: {
+      type: String,
+      default: ''
+    },
     testTitle: {
       type: String,
       default: ''
@@ -196,6 +200,10 @@ export default {
   computed: {
     allMarkdown: function () {
       let markdown = [];
+      if (this.testCategory) {
+        const category = '`' + this.testCategory + '/00xx`\n';
+        markdown.push(category);
+      }
       if (this.showTestDescription) {
         const description = this.wrapInMarkdownCodeFence([
           this.testTitle,
