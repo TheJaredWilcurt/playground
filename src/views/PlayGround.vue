@@ -103,8 +103,8 @@ import {
   zlibSync
 } from 'fflate';
 
-import { asyncify } from '@/helpers/helpers.js';
 import { categories } from '@/helpers/categories.js';
+import { asyncify } from '@/helpers/helpers.js';
 
 const minifiers = {
   csslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
