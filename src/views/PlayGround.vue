@@ -96,12 +96,7 @@
 </template>
 
 <script>
-import {
-  strFromU8,
-  strToU8,
-  unzlibSync,
-  zlibSync
-} from 'fflate';
+import { useUrlParams } from '@/composables/urlParams.js';
 
 import { categories } from '@/helpers/categories.js';
 import { asyncify } from '@/helpers/helpers.js';
@@ -117,16 +112,17 @@ const minifiers = {
   sass: asyncify(() => import('@/components/minifiers/MinSass.vue'))
 };
 
-const input = `
-.foo {
-  color: rebeccapurple;
-}
-.foo:hover {
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-}
-`.trim();
+const {
+  input,
+  expected,
+  showExpected,
+  showTestDescription,
+  testCategory,
+  testTitle,
+  testDescription,
+  setUrlParams,
+  loadUrlParams
+} = useUrlParams();
 
 export default {
   name: 'PlayGround',
@@ -139,13 +135,13 @@ export default {
   data: function () {
     return {
       input,
-      showExpected: false,
+      expected,
+      showExpected,
+      showTestDescription,
+      testCategory,
+      testTitle,
+      testDescription,
       showErrors: false,
-      showTestDescription: false,
-      testCategory: '',
-      testTitle: '',
-      testDescription: '',
-      expected: '',
       output: {},
       versions: {},
       shortestMinifiedLength: 0,
@@ -153,6 +149,8 @@ export default {
     };
   },
   methods: {
+    setUrlParams,
+    loadUrlParams,
     initialize: function () {
       Object.keys(minifiers).forEach((key) => {
         this.output[key] = '';
@@ -186,95 +184,11 @@ export default {
     },
     setVersion: function (key, value) {
       this.versions[key] = value;
-    },
-    urlEncode: function (data) {
-      const buffer = strToU8(data);
-      const zipped = zlibSync(buffer, { level: 9 });
-      const binary = strFromU8(zipped, true);
-      return btoa(binary);
-    },
-    urlDecode: function (base64) {
-      const binary = atob(base64);
-      if (binary.startsWith('\x78\xDA')) {
-        const buffer = strToU8(binary, true);
-        const unzipped = unzlibSync(buffer);
-        return strFromU8(unzipped);
-      }
-      return decodeURIComponent(escape(binary));
-    },
-    setUrlParams: function () {
-      const url = new URL(window.location);
-      let value = '';
-      if (this.input) {
-        value = this.urlEncode(this.input);
-      }
-      if (this.showExpected) {
-        url.searchParams.set('x', this.urlEncode(this.expected));
-      } else {
-        url.searchParams.delete('x');
-      }
-      if (this.showTestDescription) {
-        if (this.encodedCategory > 0) {
-          url.searchParams.set('c', String(this.encodedCategory));
-        }
-        url.searchParams.set('t', this.urlEncode(this.testTitle));
-        url.searchParams.set('d', this.urlEncode(this.testDescription));
-      } else {
-        url.searchParams.delete('c');
-        url.searchParams.delete('t');
-        url.searchParams.delete('d');
-      }
-      url.searchParams.set('v', value);
-      history.replaceState({}, '', url);
-    },
-    loadUrlParams: function () {
-      const url = new URL(window.location);
-      const value = url.searchParams.get('v');
-      const input = url.searchParams.get('i');
-      const expected = url.searchParams.get('e');
-      const expectation = url.searchParams.get('x');
-      const categoryIndex = url.searchParams.get('c');
-      const title = url.searchParams.get('t');
-      const description = url.searchParams.get('d');
-      if (typeof(expected) === 'string') {
-        url.searchParams.delete('e');
-        history.replaceState({}, '', url);
-        this.showExpected = true;
-        this.expected = expected;
-      } else if (typeof(expectation) === 'string') {
-        this.showExpected = true;
-        this.expected = this.urlDecode(expectation);
-      }
-
-      if (typeof(categoryIndex) === 'string') {
-        this.testCategory = categories[categoryIndex] || '';
-      }
-      if (typeof(title) === 'string') {
-        this.showTestDescription = true;
-        this.testTitle = this.urlDecode(title);
-      }
-      if (typeof(description) === 'string') {
-        this.showTestDescription = true;
-        this.testDescription = this.urlDecode(description);
-      }
-
-      if (input?.length) {
-        url.searchParams.delete('i');
-        history.replaceState({}, '', url);
-        this.input = input;
-      } else if (value) {
-        this.input = this.urlDecode(value);
-      }
     }
   },
   computed: {
     minifiers: function () {
       return minifiers;
-    },
-    encodedCategory: function () {
-      return categories.findIndex((category) => {
-        return category === this.testCategory;
-      });
     }
   },
   watch: {
@@ -282,26 +196,9 @@ export default {
       if (!value) {
         this.winners = [];
       }
-      this.setUrlParams();
     },
     showExpected: function () {
       this.setWinners();
-      this.setUrlParams();
-    },
-    expected: function () {
-      this.setUrlParams();
-    },
-    showTestDescription: function () {
-      this.setUrlParams();
-    },
-    testCategory: function () {
-      this.setUrlParams();
-    },
-    testTitle: function () {
-      this.setUrlParams();
-    },
-    testDescription: function () {
-      this.setUrlParams();
     }
   },
   created: function () {
