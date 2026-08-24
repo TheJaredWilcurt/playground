@@ -98,7 +98,6 @@
 <script>
 import { useUrlParams } from '@/composables/urlParams.js';
 
-import { categories } from '@/helpers/categories.js';
 import { asyncify } from '@/helpers/helpers.js';
 
 const minifiers = {
