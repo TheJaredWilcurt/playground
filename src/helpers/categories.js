@@ -32,6 +32,7 @@ export const categories = [
   'selectors-advanced',
   'shorthand-values',
   'shorthands',
+  'shorthands-unsafe',
   'starting-style',
   'supports',
   'transforms',
