@@ -27,16 +27,13 @@
 
 <script>
 import cssnano from 'cssnano';
-import advancedPreset from 'cssnano-preset-advanced';
+import { version } from 'cssnano/package.json' with { type: 'json' };
+import cssnanoPresetAdvanced from 'cssnano-preset-advanced';
 import postcss from 'postcss';
-
-import { dependencies } from '../../../package.json' with { type: 'json' };
 
 import minifierMixin from '@/helpers/minifierMixin.js';
 
-const version = dependencies.cssnano.replace('^', '');
-
-const preset = advancedPreset({
+const preset = cssnanoPresetAdvanced({
   // Potentially incorrect behavior, breaks several tests
   cssDeclarationSorter: false,
   // Removes @font-face declarations that are commonly used in other files
