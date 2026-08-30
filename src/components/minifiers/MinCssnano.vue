@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import preset from 'cssnano-preset-advanced';
+import cssnanoPresetAdvanced from 'cssnano-preset-advanced';
 import postcss from 'postcss';
 
 import { dependencies } from '../../../package.json' with { type: 'json' };
@@ -35,9 +35,10 @@ import minifierMixin from '@/helpers/minifierMixin.js';
 
 const version = dependencies.cssnano.replace('^', '');
 
-const loadPlugins = function () {
+const createPluginsCache = function () {
+  const nanoPlugins = cssnanoPresetAdvanced().plugins;
   const postcssPlugins = [];
-  for (const plugin of preset().plugins) {
+  for (const plugin of nanoPlugins) {
     const [processor, options] = plugin;
     const shouldInclude = !(
       typeof(options) === 'object' &&
@@ -49,10 +50,10 @@ const loadPlugins = function () {
   }
   return postcssPlugins;
 };
+const postcssPlugins = createPluginsCache();
 
 const minimize = async function (input) {
   try {
-    const postcssPlugins = loadPlugins();
     const result = await postcss(postcssPlugins)
       .process(input, { from: './playground.css' });
     return result;
