@@ -26,22 +26,25 @@
 </template>
 
 <script>
-import { version } from 'cssnano/package.json' with { type: 'json' };
 import cssnanoPresetAdvanced from 'cssnano-preset-advanced';
 import postcss from 'postcss';
 
+import { dependencies } from '../../../package.json' with { type: 'json' };
+
 import minifierMixin from '@/helpers/minifierMixin.js';
+
+const version = dependencies.cssnano.replace('^', '');
 
 function createPluginsCache () {
   const nanoPlugins = cssnanoPresetAdvanced().plugins;
   const postcssPlugins = [];
   for (const plugin of nanoPlugins) {
     const [processor, options] = plugin;
-    if (
-      typeof options === 'undefined' ||
-      (typeof options === 'object' && !options.exclude) ||
-      (typeof options === 'boolean' && options === true)
-    ) {
+    const shouldInclude = !(
+      typeof(options) === 'object' &&
+      options.exclude
+    );
+    if (shouldInclude) {
       postcssPlugins.push(processor(options));
     }
   }
