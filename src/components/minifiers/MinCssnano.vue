@@ -52,28 +52,6 @@ function createPluginsCache () {
 }
 const postcssPlugins = createPluginsCache();
 
-const minimize = async function (input) {
-  try {
-    const result = await postcss(postcssPlugins)
-      .process(input, { from: './playground.css' });
-    return result;
-  } catch (error) {
-    if (error instanceof postcss.CssSyntaxError) {
-      return {
-        error: error.reason + ' (' + error.line + ':' + error.column + ')'
-      };
-    }
-    if (error instanceof Error) {
-      return {
-        error: error.message
-      };
-    }
-    return {
-      error: String(error)
-    };
-  }
-};
-
 export default {
   name: 'MinCssnano',
   mixins: [minifierMixin],
@@ -81,14 +59,21 @@ export default {
     version
   },
   methods: {
+    runner: function (input) {
+      return new Promise((resolve, reject) => {
+        postcss(postcssPlugins)
+          .process(input, { from: './playground.css' })
+          .then((result) => resolve(result))
+          .catch((error) => reject(error));
+      });
+    },
     minify: async function () {
       let start = new Date();
-      const result = await minimize(this.input);
-      if (result.css) {
+      try {
+        const result = await this.runner(this.input);
         this.output = result.css;
-      }
-      if (result.error) {
-        this.errorCatcher(result.error);
+      } catch (error) {
+        this.errorCatcher(error);
       }
       let end = new Date();
       this.duration = end - start;
