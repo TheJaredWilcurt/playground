@@ -34,16 +34,12 @@ export default {
     input: {
       type: String,
       default: ''
-    },
-    language: {
-      type: String,
-      default: 'markdown'
     }
   },
   computed: {
     code: function () {
       return highlighter.codeToHtml(this.input, {
-        lang: this.language,
+        lang: 'markdown',
         theme: 'my-theme'
       });
     }
