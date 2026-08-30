@@ -35,7 +35,7 @@ import minifierMixin from '@/helpers/minifierMixin.js';
 
 const version = dependencies.cssnano.replace('^', '');
 
-const createPluginsCache = function () {
+function createPluginsCache () {
   const nanoPlugins = cssnanoPresetAdvanced().plugins;
   const postcssPlugins = [];
   for (const plugin of nanoPlugins) {
@@ -49,7 +49,7 @@ const createPluginsCache = function () {
     }
   }
   return postcssPlugins;
-};
+}
 const postcssPlugins = createPluginsCache();
 
 const minimize = async function (input) {
