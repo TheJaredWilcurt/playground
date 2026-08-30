@@ -17,6 +17,9 @@ const config = defineConfig({
     sourcemap: false,
     target: 'baseline-widely-available'
   },
+  optimizeDeps: {
+    exclude: ['css-declaration-sorter']
+  },
   plugins: [
     vue(),
     vueDevTools({

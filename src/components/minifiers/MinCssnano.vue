@@ -26,25 +26,52 @@
 </template>
 
 <script>
-import cssnano from 'cssnano';
-import { version } from 'cssnano/package.json' with { type: 'json' };
-import cssnanoPresetAdvanced from 'cssnano-preset-advanced';
+import preset from 'cssnano-preset-advanced';
 import postcss from 'postcss';
+
+import { dependencies } from '../../../package.json' with { type: 'json' };
 
 import minifierMixin from '@/helpers/minifierMixin.js';
 
-const preset = cssnanoPresetAdvanced({
-  // Potentially incorrect behavior, breaks several tests
-  cssDeclarationSorter: false,
-  // Removes @font-face declarations that are commonly used in other files
-  discardUnused: false,
-  // Deletes duplicate keyframes and redirects keyframe references
-  mergeIdents: false,
-  // Replaces keyframe names with "a"
-  reduceIdents: false,
-  // Changes `z-index: 5000` to `z-index: 1`
-  zindex: false
-});
+const version = dependencies.cssnano.replace('^', '');
+
+const loadPlugins = function () {
+  const postcssPlugins = [];
+  for (const plugin of preset().plugins) {
+    const [processor, options] = plugin;
+    const shouldInclude = !(
+      typeof(options) === 'object' &&
+      options.exclude
+    );
+    if (shouldInclude) {
+      postcssPlugins.push(processor(options));
+    }
+  }
+  return postcssPlugins;
+};
+
+const minimize = async function (input) {
+  try {
+    const postcssPlugins = loadPlugins();
+    const result = await postcss(postcssPlugins)
+      .process(input, { from: './playground.css' });
+    return result;
+  } catch (error) {
+    if (error instanceof postcss.CssSyntaxError) {
+      return {
+        error: error.reason + ' (' + error.line + ':' + error.column + ')'
+      };
+    }
+    if (error instanceof Error) {
+      return {
+        error: error.message
+      };
+    }
+    return {
+      error: String(error)
+    };
+  }
+};
 
 export default {
   name: 'MinCssnano',
@@ -53,21 +80,14 @@ export default {
     version
   },
   methods: {
-    runner: function (input) {
-      return new Promise((resolve, reject) => {
-        postcss([cssnano({ preset })])
-          .process(input, { from: './playground.css' })
-          .then((result) => resolve(result))
-          .catch((error) => reject(error));
-      });
-    },
     minify: async function () {
       let start = new Date();
-      try {
-        const result = await this.runner(this.input);
+      const result = await minimize(this.input);
+      if (result.css) {
         this.output = result.css;
-      } catch (error) {
-        this.errorCatcher(error);
+      }
+      if (result.error) {
+        this.errorCatcher(result.error);
       }
       let end = new Date();
       this.duration = end - start;
