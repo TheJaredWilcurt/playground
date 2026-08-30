@@ -8,13 +8,33 @@
   --light-text: hsl(from rebeccapurple h s 30% / alpha);
   --checkmark: hsl(from rebeccapurple calc(h + 180) s l / alpha);
   --code-mirror-gutter: hsl(from rebeccapurple h s 85% / alpha);
-  --hljs-keyframes: hsl(from rebeccapurple h s calc(l + 12) / alpha);
-  --hljs-comment: hsl(from rebeccapurple h 20% 45% / alpha);
-  --hljs-number: hsl(from rebeccapurple calc(h + 180) s calc(l - 12) / alpha);
-  --hljs-number-darker: hsl(from var(--hljs-number) h s calc(l - 6) / alpha);
-  --hljs-string: hsl(from rebeccapurple calc(h + 310) s 50% / alpha);
-  --hljs-symbol: hsl(from rebeccapurple calc(h + 80) s 40% / alpha);
-  --hljs-tag: hsl(from rebeccapurple calc(h + 50) calc(s + 5) 43% / alpha);
+
+  /* Syntax highlighting colors */
+  --syntax-comment: hsl(from rebeccapurple h 20% 45% / alpha);
+  --syntax-keyframes: hsl(from rebeccapurple h s calc(l + 12) / alpha);
+  --syntax-number: hsl(from rebeccapurple calc(h + 180) s calc(l - 12) / alpha);
+  --syntax-number-darker: hsl(from var(--hljs-number) h s calc(l - 6) / alpha);
+  --syntax-string: hsl(from rebeccapurple calc(h + 310) s 50% / alpha);
+  --syntax-symbol: hsl(from rebeccapurple calc(h + 80) s 40% / alpha);
+  --syntax-tag: hsl(from rebeccapurple calc(h + 50) calc(s + 5) 43% / alpha);
+
+  --shiki-background: transparent;
+  --shiki-foreground: inherit;
+  --shiki-token-comment: var(--syntax-comment);
+  --shiki-token-constant: var(--syntax-tag);
+  --shiki-token-function: var(--syntax-string);
+  --shiki-token-keyword: var(--syntax-symbol);
+  --shiki-token-link: var(--syntax-keyframes);
+  --shiki-token-string: var(--syntax-string);
+
+  --hljs-keyframes: var(--syntax-keyframes);
+  --hljs-comment: var(--syntax-comment);
+  --hljs-number: var(--syntax-number);
+  --hljs-number-darker: var(--syntax-number-darker);
+  --hljs-string: var(--syntax-string);
+  --hljs-symbol: var(--syntax-symbol);
+  --hljs-tag: var(--syntax-tag);
+
   --logo-box-width: 64px;
   --logo-box-height: 35px;
 }
@@ -25,10 +45,10 @@
   --toolbar-background: hsl(from rebeccapurple h s 20% / alpha);
   --light-text: hsl(from rebeccapurple h s 70% / alpha);
   --code-mirror-gutter: hsl(from rebeccapurple h s 15% / alpha);
-  --hljs-number: hsl(from rebeccapurple calc(h + 180) s l / alpha);
-  --hljs-string: hsl(from rebeccapurple calc(h + 310) s 70% / alpha);
-  --hljs-symbol: hsl(from rebeccapurple calc(h + 130) 100% l / alpha);
-  --hljs-tag: hsl(from rebeccapurple calc(h + 50) s 48% / alpha);
+  --syntax-number: hsl(from rebeccapurple calc(h + 180) s l / alpha);
+  --syntax-string: hsl(from rebeccapurple calc(h + 310) s 70% / alpha);
+  --syntax-symbol: hsl(from rebeccapurple calc(h + 130) 100% l / alpha);
+  --syntax-tag: hsl(from rebeccapurple calc(h + 50) s 48% / alpha);
 }
 
 *,

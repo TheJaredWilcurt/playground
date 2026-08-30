@@ -24,11 +24,10 @@
     </button>
     <DoxenAccordion :show="show">
       <div class="markdown-table-pre-container">
-        <pre
-          v-html="formatted"
-          id="markdown-table"
+        <MarkdownHighlighter
           class="markdown-table-pre"
-        ></pre>
+          :input="allMarkdown"
+        />
       </div>
       <div class="markdown-table-button-container">
         <transition name="markdown-table-fade">
@@ -59,12 +58,9 @@
 </template>
 
 <script>
-/* eslint-disable import-x/extensions */
-import hljs from 'highlight.js/lib/core';
-import markdown from 'highlight.js/lib/languages/markdown';
 import { DoxenAccordion } from 'vue-doxen';
 
-hljs.registerLanguage('markdown', markdown);
+import MarkdownHighlighter from '@/components/MarkdownHighlighter.vue';
 
 const VERSION = 'Version';
 const SIZE = 'Size';
@@ -72,7 +68,8 @@ const SIZE = 'Size';
 export default {
   name: 'MarkdownTable',
   components: {
-    DoxenAccordion
+    DoxenAccordion,
+    MarkdownHighlighter
   },
   props: {
     input: {
@@ -219,9 +216,6 @@ export default {
       }
       markdown.push(this.table);
       return markdown.join('\n\n');
-    },
-    formatted: function () {
-      return hljs.highlight(this.allMarkdown.trim(), { language: 'markdown' }).value;
     },
     issueLink: function () {
       const title = 'Test: ' + this.testTitle.replace('# ', '');
