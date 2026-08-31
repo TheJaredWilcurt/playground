@@ -39,7 +39,7 @@
           id="test-description-title"
           class="test-description-input-container"
           language="md"
-          style="--default-height: 25px"
+          style="--default-height: 25px;max-width: 650px;"
         />
       </div>
     </div>
