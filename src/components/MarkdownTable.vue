@@ -198,7 +198,7 @@ export default {
     allMarkdown: function () {
       let markdown = [];
       if (this.testCategory) {
-        const category = '`' + this.testCategory + '/00xx`\n';
+        const category = '`' + this.testCategory + '/00xx`';
         markdown.push(category);
       }
       if (this.showTestDescription) {
