@@ -19,6 +19,7 @@ export const categories = [
   'escaping',
   'font-face',
   'gradients',
+  'idempotency',
   'import',
   'keyframes',
   'layer',
