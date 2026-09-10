@@ -7,6 +7,7 @@
 export const categories = [
   '',
   'anchor',
+  'calc',
   'charset',
   'color-rounding',
   'colors',
@@ -38,6 +39,7 @@ export const categories = [
   'supports',
   'transforms',
   'values',
+  'vendors',
   'whitespace',
   'zero-units'
 ];
