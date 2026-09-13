@@ -23,6 +23,7 @@ export const categories = [
   'idempotency',
   'import',
   'keyframes',
+  'lang',
   'layer',
   'media',
   'merging',
