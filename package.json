@@ -12,7 +12,7 @@
     "get-categories": "node ./scripts/getCategories.js",
     "lint": "eslint --ext .js,.vue src scripts vite.config.js eslint.config.js",
     "fix": "npm run lint -- --fix",
-    "proto": "proto pin node latest --resolve --tool-native && git status"
+    "proto": "proto pin node latest --resolve --tool-native && proto pin npm latest --resolve --tool-native && git status"
   },
   "ManifestComments": [],
   "dependencies": {
@@ -22,7 +22,7 @@
     "@codemirror/view": "^6.43.11",
     "@sarap422/font-dinish": "^1.0.6",
     "@shikijs/langs": "^4.4.3",
-    "@thejaredwilcurt/csslop": "^0.0.37",
+    "@thejaredwilcurt/csslop": "^0.0.38",
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
@@ -49,7 +49,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitejs/plugin-vue": "^6.0.9",
     "cross-env": "^10.1.0",
     "eslint": "^10.10.0",
     "eslint-config-tjw-base": "^5.0.0",
@@ -75,7 +75,7 @@
     },
     "packageManager": {
       "name": "npm",
-      "version": "11.17.0"
+      "version": "12.0.2"
     }
   }
 }

@@ -22,6 +22,7 @@ export const categories = [
   'gradients',
   'idempotency',
   'import',
+  'initial',
   'keyframes',
   'lang',
   'layer',
