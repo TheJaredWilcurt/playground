@@ -8,6 +8,10 @@
   --light-text: hsl(from rebeccapurple h s 30% / alpha);
   --checkmark: hsl(from rebeccapurple calc(h + 180) s l / alpha);
   --code-mirror-gutter: hsl(from rebeccapurple h s 85% / alpha);
+  --diff-added: hsl(from rebeccapurple calc(h + 180) s calc(l + 20) / alpha);
+  --diff-added-border: hsl(from rebeccapurple calc(h + 180) s l / alpha);
+  --diff-removed: hsl(from rebeccapurple 0 s calc(l + 20) / alpha);
+  --diff-removed-border: hsl(from rebeccapurple 0 s calc(l) / alpha);
 
   /* Syntax highlighting colors */
   --syntax-comment: hsl(from rebeccapurple h 20% 45% / alpha);
@@ -49,6 +53,8 @@
   --syntax-string: hsl(from rebeccapurple calc(h + 310) s 70% / alpha);
   --syntax-symbol: hsl(from rebeccapurple calc(h + 130) 100% l / alpha);
   --syntax-tag: hsl(from rebeccapurple calc(h + 50) s 48% / alpha);
+  --diff-added: hsl(from rebeccapurple calc(h + 180) s calc(l - 15) / alpha);
+  --diff-removed: hsl(from rebeccapurple 0 s calc(l - 10) / alpha);
 }
 
 *,

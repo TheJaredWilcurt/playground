@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false
     },
+    expected: {
+      type: String,
+      default: ''
+    },
     showExpected: {
       type: Boolean,
       default: false
@@ -51,6 +55,8 @@ export default {
     },
     minifierTemplateProps: function () {
       return {
+        input: this.input,
+        expected: this.expected,
         fullVersion: this.fullVersion,
         version: this.version,
         output: this.output,

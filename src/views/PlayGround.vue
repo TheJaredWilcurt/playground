@@ -48,6 +48,8 @@
           v-for="(minifier, key) in minifiers"
           :is="minifier"
           :input="input"
+          :expected="expected"
+          :showDiffs="showDiffs"
           :showErrors="showErrors"
           :showExpected="showExpected"
           :winner="winners.includes(key)"
@@ -62,6 +64,10 @@
       <CheckBox
         v-model="showExpected"
         label="Show Expected Output"
+      />
+      <CheckBox
+        v-model="showDiffs"
+        label="Show Diffs"
       />
       <CheckBox
         v-model="showErrors"
@@ -114,6 +120,7 @@ const minifiers = {
 const {
   input,
   expected,
+  showDiffs,
   showExpected,
   showTestDescription,
   testCategory,
@@ -140,6 +147,7 @@ export default {
       testCategory,
       testTitle,
       testDescription,
+      showDiffs,
       showErrors: false,
       output: {},
       versions: {},

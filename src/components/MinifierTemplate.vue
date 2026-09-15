@@ -15,7 +15,10 @@
       <LoadingDots />
     </td>
     <td v-else>
-      <pre class="minifier-template-pre"><code v-html="formatted"></code></pre>
+      <pre
+        class="minifier-template-pre"
+        :class="{ 'minifier-template-pre-diff': showDiffs }"
+      ><code v-html="formatted"></code></pre>
     </td>
 
     <td class="minifier-template-center">
@@ -36,6 +39,7 @@
 
 <script>
 /* eslint-disable import-x/extensions */
+import { diffChars } from 'diff';
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
 
@@ -57,8 +61,20 @@ export default {
       type: String,
       required: true
     },
+    input: {
+      type: String,
+      required: true
+    },
     output: {
       type: String,
+      required: true
+    },
+    expected: {
+      type: String,
+      required: true
+    },
+    showDiffs: {
+      type: Boolean,
       required: true
     },
     showExpected: {
@@ -80,7 +96,31 @@ export default {
   },
   computed: {
     formatted: function () {
-      return hljs.highlight(this.output, { language: 'css' }).value;
+      const options = {
+        language: 'css'
+      };
+
+      if (this.showDiffs) {
+        let base = this.input.replaceAll('\n', '');
+        let compare = this.output;
+        if (this.showExpected) {
+          base = this.output;
+          compare = this.expected;
+        }
+        return diffChars(base, compare)
+          .map((token) => {
+            let span = '<span>';
+            if (token.added) {
+              span = '<span class="minifier-template-diff-added">';
+            } else if (token.removed) {
+              span = '<span class="minifier-template-diff-removed">';
+            }
+            return span + hljs.highlight(token.value, options).value + '</span>';
+          })
+          .join('');
+      }
+
+      return hljs.highlight(this.output, options).value;
     }
   }
 };
@@ -92,6 +132,9 @@ export default {
 }
 .minifier-template-pre {
   max-height: 120px;
+}
+.minifier-template-pre-diff {
+  line-height: 1.44;
 }
 .minifier-template-checkmark-container {
   position: relative;
@@ -123,5 +166,13 @@ export default {
   height: 26px;
   transform: rotate(37deg);
   border-radius: 10px 10px 20px 0px;
+}
+.minifier-template-diff-added {
+  background: var(--diff-added);
+  border-top: 1px solid var(--diff-added-border);
+}
+.minifier-template-diff-removed {
+  background: var(--diff-removed);
+  border-bottom: 1px solid var(--diff-removed-border);
 }
 </style>

@@ -23,6 +23,7 @@ const defaultInput = `
 export const useUrlParams = function () {
   const input = ref(defaultInput);
   const expected = ref('');
+  const showDiffs = ref(false);
   const showExpected = ref(false);
   const showTestDescription = ref(false);
   const testCategory = ref('');
@@ -44,6 +45,11 @@ export const useUrlParams = function () {
       value = urlEncode(input.value);
     }
 
+    if (showDiffs.value) {
+      url.searchParams.set('f', '1');
+    } else {
+      url.searchParams.delete('f');
+    }
     if (showExpected.value) {
       url.searchParams.set('x', urlEncode(expected.value));
     } else {
@@ -75,6 +81,9 @@ export const useUrlParams = function () {
     const paramCategoryIndex = url.searchParams.get('c');
     const paramTitle = url.searchParams.get('t');
     const paramDescription = url.searchParams.get('d');
+    const paramShowDiffs = url.searchParams.get('f');
+
+    showDiffs.value = (paramShowDiffs === '1');
 
     if (typeof(paramExpected) === 'string') {
       url.searchParams.delete('e');
@@ -110,6 +119,7 @@ export const useUrlParams = function () {
   const stateToStoreInUrlParams = [
     input,
     expected,
+    showDiffs,
     showExpected,
     showTestDescription,
     testCategory,
@@ -123,6 +133,7 @@ export const useUrlParams = function () {
   return {
     input,
     expected,
+    showDiffs,
     showExpected,
     showTestDescription,
     testCategory,
