@@ -2,8 +2,13 @@
   <MinifierTemplate v-bind="minifierTemplateProps">
     <td>
       <a
-        href="https://TheJaredWilcurt.com/csslop"
+        class="min-csslop-link"
+        :href="link"
         title="CSSLOP"
+        @click="updateLink"
+        @focus="updateLink"
+        @keydown="updateLink"
+        @mouseOver="updateLink"
       >
         <img
           alt="CSSLOP logo"
@@ -21,13 +26,24 @@ import { version } from '@thejaredwilcurt/csslop/package.json' with { type: 'jso
 
 import minifierMixin from '@/helpers/minifierMixin.js';
 
+const BASE_URL = 'https://TheJaredWilcurt.com/csslop';
+
 export default {
   name: 'MinCsso',
   mixins: [minifierMixin],
   constants: {
     version
   },
+  data: function () {
+    return {
+      link: BASE_URL
+    };
+  },
   methods: {
+    updateLink: function () {
+      const url = new URL(window.location);
+      this.link = BASE_URL + '?v=' + url.searchParams.get('v');
+    },
     minify: function () {
       let start = new Date();
       try {
@@ -39,11 +55,17 @@ export default {
       this.duration = end - start;
       this.loading = false;
     }
+  },
+  created: function () {
+    this.updateLink();
   }
 };
 </script>
 
 <style>
+.min-csslop-link {
+  display: flex;
+}
 .min-csslop-logo {
   max-width: var(--logo-box-width);
 }
