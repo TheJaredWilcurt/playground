@@ -41,6 +41,7 @@
           <th>Time</th>
           <th>Output</th>
           <th>Length</th>
+          <th v-if="showGZip" title="The length of the minified output after being gzipped">GZipped</th>
         </tr>
       </thead>
       <tbody>
@@ -52,6 +53,8 @@
           :showDiffs="showDiffs"
           :showErrors="showErrors"
           :showExpected="showExpected"
+          :showGZip="showGZip"
+          :gZipLength="gZips[key]"
           :winner="winners.includes(key)"
           @minified="setOutput(key, $event)"
           @version="setVersion(key, $event)"
@@ -68,6 +71,10 @@
       <CheckBox
         v-model="showDiffs"
         label="Show Diffs"
+      />
+      <CheckBox
+        v-model="showGZip"
+        label="Show GZipped Sizes"
       />
       <CheckBox
         v-model="showErrors"
@@ -104,7 +111,10 @@
 <script>
 import { useUrlParams } from '@/composables/urlParams.js';
 
-import { asyncify } from '@/helpers/helpers.js';
+import {
+  asyncify,
+  getGzippedSize
+} from '@/helpers/helpers.js';
 
 const minifiers = {
   csslop: asyncify(() => import('@/components/minifiers/MinCsslop.vue')),
@@ -122,6 +132,7 @@ const {
   expected,
   showDiffs,
   showExpected,
+  showGZip,
   showTestDescription,
   testCategory,
   testTitle,
@@ -143,15 +154,18 @@ export default {
       input,
       expected,
       showExpected,
+      showGZip,
       showTestDescription,
       testCategory,
       testTitle,
       testDescription,
       showDiffs,
       showErrors: false,
+      gZips: {},
       output: {},
       versions: {},
       shortestMinifiedLength: 0,
+      shortestZippedLength: 0,
       winners: []
     };
   },
@@ -166,10 +180,14 @@ export default {
     },
     setWinners: function () {
       this.winners = [];
-      if (this.shortestMinifiedLength) {
+      if (this.shortestMinifiedLength || this.shortestZippedLength) {
         for (const key in this.output) {
           if (this.showExpected) {
             if (this.expected.trim() === this.output[key]) {
+              this.winners.push(key);
+            }
+          } else if (this.showGZip) {
+            if (this.gZips[key] === this.shortestZippedLength) {
               this.winners.push(key);
             }
           } else if (this.output[key]?.length === this.shortestMinifiedLength) {
@@ -178,15 +196,26 @@ export default {
         }
       }
     },
-    setOutput: function (key, value) {
+    setOutput: async function (key, value) {
       this.output[key] = value;
-      const values = Object.values(this.output);
-      const lengths = values
+      const lengths = Object
+        .values(this.output)
         .filter(Boolean)
         .map((value) => {
           return value.length;
         });
       this.shortestMinifiedLength = Math.min(...lengths);
+
+      const defaultGzipOverheadOnEmptyString = 20;
+      this.gZips[key] = await getGzippedSize(value);
+      const zipLengths = Object
+        .values(this.gZips)
+        .filter(Boolean)
+        .filter((length) => {
+          return length > defaultGzipOverheadOnEmptyString;
+        })
+      this.shortestZippedLength = Math.min(...zipLengths);
+
       this.setWinners();
     },
     setVersion: function (key, value) {
@@ -205,6 +234,9 @@ export default {
       }
     },
     showExpected: function () {
+      this.setWinners();
+    },
+    showGZip: function () {
       this.setWinners();
     }
   },

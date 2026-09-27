@@ -25,6 +25,7 @@ export const useUrlParams = function () {
   const expected = ref('');
   const showDiffs = ref(false);
   const showExpected = ref(false);
+  const showGZip = ref(false);
   const showTestDescription = ref(false);
   const testCategory = ref('');
   const testTitle = ref('');
@@ -49,6 +50,11 @@ export const useUrlParams = function () {
       url.searchParams.set('f', '1');
     } else {
       url.searchParams.delete('f');
+    }
+    if (showGZip.value) {
+      url.searchParams.set('z', '1');
+    } else {
+      url.searchParams.delete('z');
     }
     if (showExpected.value) {
       url.searchParams.set('x', urlEncode(expected.value));
@@ -82,8 +88,10 @@ export const useUrlParams = function () {
     const paramTitle = url.searchParams.get('t');
     const paramDescription = url.searchParams.get('d');
     const paramShowDiffs = url.searchParams.get('f');
+    const paramShowGZip = url.searchParams.get('z');
 
     showDiffs.value = (paramShowDiffs === '1');
+    showGZip.value = (paramShowGZip === '1');
 
     if (typeof(paramExpected) === 'string') {
       url.searchParams.delete('e');
@@ -121,6 +129,7 @@ export const useUrlParams = function () {
     expected,
     showDiffs,
     showExpected,
+    showGZip,
     showTestDescription,
     testCategory,
     testTitle,
@@ -135,6 +144,7 @@ export const useUrlParams = function () {
     expected,
     showDiffs,
     showExpected,
+    showGZip,
     showTestDescription,
     testCategory,
     testTitle,

@@ -25,6 +25,13 @@
       {{ output.length.toLocaleString() }}
     </td>
 
+    <td
+      v-if="showGZip"
+      class="minifier-template-center"
+    >
+      {{ gZipLength }}
+    </td>
+
     <td>
       <div
         v-if="winner"
@@ -80,6 +87,14 @@ export default {
     showExpected: {
       type: Boolean,
       required: true
+    },
+    showGZip: {
+      type: Boolean,
+      default: false
+    },
+    gZipLength: {
+      type: Number,
+      default: undefined
     },
     loading: {
       type: Boolean,
