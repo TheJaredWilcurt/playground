@@ -213,7 +213,7 @@ export default {
         .filter(Boolean)
         .filter((length) => {
           return length > defaultGzipOverheadOnEmptyString;
-        })
+        });
       this.shortestZippedLength = Math.min(...zipLengths);
 
       this.setWinners();
