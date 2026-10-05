@@ -36,7 +36,20 @@ import minifierMixin from '@/helpers/minifierMixin.js';
 const version = dependencies.cssnano.replace('^', '');
 
 function createPluginsCache () {
-  const nanoPlugins = cssnanoPresetAdvanced().plugins;
+  // These settings should exactly match those used in css-minify-tests
+  const settings = {
+    // Potentially incorrect behavior, breaks several tests
+    cssDeclarationSorter: false,
+    // Removes @font-face declarations that are commonly used in other files
+    discardUnused: false,
+    // Deletes duplicate keyframes and redirects keyframe references
+    mergeIdents: false,
+    // Replaces keyframe names with "a"
+    reduceIdents: false,
+    // Changes `z-index: 5000` to `z-index: 1`
+    zindex: false
+  };
+  const nanoPlugins = cssnanoPresetAdvanced(settings).plugins;
   const postcssPlugins = [];
   for (const plugin of nanoPlugins) {
     const [processor, options] = plugin;
