@@ -26,9 +26,9 @@
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
-    "csskit": "^0.0.34-canary.83570cda0a",
-    "cssnano": "^9.1.1",
-    "cssnano-preset-advanced": "^9.1.1",
+    "csskit": "^0.0.35-canary.0c6bd4c608",
+    "cssnano": "^9.3.1",
+    "cssnano-preset-advanced": "^9.2.1",
     "csso": "^5.0.5",
     "diff": "^9.0.0",
     "esbuild-wasm": "^0.28.2",
@@ -38,10 +38,9 @@
     "normalize.css": "^8.0.1",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
-    "postcss": "^8.5.28",
+    "postcss": "^8.5.29",
     "pretty-ms": "^9.3.1",
-    "sass": "^1.105.0",
-    "shiki": "^4.4.3",
+    "sass": "^1.105.1",
     "string_decoder": "^1.3.0",
     "vue": "^3.5.43",
     "vue-doxen": "^0.13.4",
@@ -52,7 +51,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@vitejs/plugin-vue": "^6.0.9",
     "cross-env": "^10.1.0",
-    "eslint": "^10.11.0",
+    "eslint": "^10.12.0",
     "eslint-config-tjw-base": "^5.0.0",
     "eslint-config-tjw-import-x": "^1.0.1",
     "eslint-config-tjw-vue": "^4.0.1",
@@ -60,8 +59,9 @@
     "eslint-plugin-import-x": "^4.17.1",
     "eslint-plugin-vue": "^10.11.1",
     "eslint-plugin-vuejs-accessibility": "^2.6.0",
-    "globals": "^17.12.0",
-    "vite": "^8.3.1",
+    "globals": "^17.13.0",
+    "shiki": "^4.5.0",
+    "vite": "^8.3.2",
     "vite-plugin-node-polyfills": "^0.28.0",
     "vite-plugin-vue-devtools": "^8.2.1"
   },
@@ -76,7 +76,7 @@
     },
     "packageManager": {
       "name": "npm",
-      "version": "12.1.0"
+      "version": "12.2.0"
     }
   }
 }
