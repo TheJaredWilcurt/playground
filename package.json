@@ -26,9 +26,9 @@
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
-    "csskit": "^0.0.35-canary.830daadacc",
-    "cssnano": "^9.4.0",
-    "cssnano-preset-advanced": "^9.3.0",
+    "csskit": "^0.0.36-canary.deec89d769",
+    "cssnano": "^9.8.0",
+    "cssnano-preset-advanced": "^9.7.0",
     "csso": "^5.0.5",
     "diff": "^9.0.0",
     "esbuild-wasm": "^0.28.2",
@@ -38,18 +38,18 @@
     "normalize.css": "^8.0.1",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
-    "postcss": "^8.5.29",
-    "pretty-ms": "^9.3.1",
+    "postcss": "^8.5.30",
+    "pretty-ms": "^10.0.0",
     "sass": "^1.105.1",
     "string_decoder": "^1.3.0",
-    "vue": "^3.5.43",
+    "vue": "^3.5.44",
     "vue-doxen": "^0.13.5",
     "vue-options-api-constants-plugin": "^1.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitejs/plugin-vue": "^6.0.10",
     "cross-env": "^10.1.0",
     "eslint": "^10.12.0",
     "eslint-config-tjw-base": "^5.0.0",
@@ -72,7 +72,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "26.11.1"
+      "version": "26.12.0"
     },
     "packageManager": {
       "name": "npm",
