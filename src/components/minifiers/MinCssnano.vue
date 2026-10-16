@@ -38,8 +38,6 @@ const version = dependencies.cssnano.replace('^', '');
 function createPluginsCache () {
   // These settings should exactly match those used in css-minify-tests
   const settings = {
-    // Potentially incorrect behavior, breaks several tests
-    cssDeclarationSorter: false,
     // Removes @font-face declarations that are commonly used in other files
     discardUnused: false,
     // Deletes duplicate keyframes and redirects keyframe references
