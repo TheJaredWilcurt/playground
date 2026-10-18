@@ -39,6 +39,7 @@ export const categories = [
   'shorthands-unsafe',
   'starting-style',
   'supports',
+  'svg',
   'transforms',
   'values',
   'vendors',
