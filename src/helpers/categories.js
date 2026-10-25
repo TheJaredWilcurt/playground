@@ -8,6 +8,7 @@ export const categories = [
   '',
   'anchor',
   'calc',
+  'calc-advanced',
   'charset',
   'color-rounding',
   'colors',
