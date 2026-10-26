@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <slot></slot>
+    <slot />
     <td
       class="minifier-template-center"
       :title="'v' + (fullVersion || version)"
