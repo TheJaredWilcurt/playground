@@ -26,7 +26,7 @@
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
-    "csskit": "^0.0.37-canary.6723d755df",
+    "csskit": "^0.0.37-canary.fe6118c6e9",
     "cssnano": "^9.9.0",
     "cssnano-preset-advanced": "^10.0.0",
     "csso": "^5.0.5",
@@ -40,7 +40,7 @@
     "path-browserify": "^1.0.1",
     "postcss": "^8.5.32",
     "pretty-ms": "^10.0.0",
-    "sass": "^1.106.1",
+    "sass": "^1.107.0",
     "string_decoder": "^1.3.0",
     "vue": "^3.5.44",
     "vue-doxen": "^0.13.5",
@@ -72,7 +72,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "26.12.1"
+      "version": "26.13.0"
     },
     "packageManager": {
       "name": "npm",
