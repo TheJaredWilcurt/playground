@@ -98,6 +98,49 @@ export default {
   .cm-activeLineGutter { background: var(--background); }
   .cm-activeLine { background-color: var(--code-mirror-gutter); }
   .cm-specialChar { color: var(--hljs-number); }
+  .cm-panels { background-color: var(--code-mirror-gutter); }
+  .cm-panels-bottom {
+    border-color: transparent;
+    border-radius: 0px 9px 25px 25px;
+    margin-top: 3px;
+  }
+  .cm-search {
+    padding-left: 30px;
+    label {
+      display: inline-flex;
+      align-items: center;
+      color: var(--light-text);
+    }
+    input[type="checkbox"] {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 2px solid rebeccapurple;
+      background: var(--toolbar-background);
+      border-radius: 0px 5px 5px;
+      vertical-align: text-bottom;
+      &:checked {
+        background: rebeccapurple;
+      }
+    }
+  }
+  .cm-textfield {
+    background: var(--hljs-comment);
+    border-color: transparent;
+    border-radius: 0px 4px 4px 4px;
+    color: var(--button-fg);
+  }
+  .cm-button {
+    background: var(--button-bg);
+    border-color: transparent;
+    border-radius: 0px 4px 4px 4px;
+    color: var(--button-fg);
+    &:focus,
+    &:hover {
+      background: var(--button-hover);
+    }
+  }
+  .cm-panel { color: currentcolor; }
   .\00037C5 { color: var(--hljs-tag); }
   .\00037Cb { color: var(--hljs-number-darker); }
   .\00037Cc { color: var(--light-text); }

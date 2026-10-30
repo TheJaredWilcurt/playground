@@ -4,25 +4,41 @@
       class="playground-form"
       @submit.prevent
     >
-      <label
-        for="codemirror"
-        class="playground-label"
-      >
-        Input ({{ input.length.toLocaleString() }})
-      </label>
+      <div class="playground-label">
+        <label for="codemirror">
+          Input
+        </label>
+        <span class="playground-length">
+          (<strong>Length:</strong> {{ input.length.toLocaleString() }})
+        </span>
+      </div>
       <CodeMirror
         v-model="input"
         id="codemirror"
         class="playground-input-container"
         style="--default-height: 153px"
       />
-      <label
-        v-if="showExpected"
-        for="codemirror2"
-        class="playground-label"
-      >
-        Expected Output ({{ expected.length.toLocaleString() }})
-      </label>
+      <div class="playground-label">
+        <label
+          v-if="showExpected"
+          for="codemirror2"
+        >
+          Expected Output
+        </label>
+        <span
+          v-if="showExpected"
+          class="playground-length"
+        >
+          (<strong>Length:</strong>
+          {{ expected.length.toLocaleString() }}<span
+            v-if="showGZip"
+            style="border-left: 1px solid currentcolor;margin: 0 0 0 0.5rem;padding:0 0 0 0.5rem;"
+          >
+            <strong>GZip:</strong>
+            {{ expectedGZip }}
+          </span>)
+        </span>
+      </div>
       <CodeMirror
         v-if="showExpected"
         v-model="expected"
@@ -161,6 +177,7 @@ export default {
       testDescription,
       showDiffs,
       showErrors: false,
+      expectedGZip: 20,
       gZips: {},
       output: {},
       versions: {},
@@ -220,6 +237,9 @@ export default {
     },
     setVersion: function (key, value) {
       this.versions[key] = value;
+    },
+    setExpectedGzip: async function () {
+      this.expectedGZip = await getGzippedSize(this.expected);
     }
   },
   computed: {
@@ -228,6 +248,9 @@ export default {
     }
   },
   watch: {
+    expected: function () {
+      this.setExpectedGzip();
+    },
     input: function (value) {
       if (!value) {
         this.winners = [];
@@ -265,7 +288,18 @@ export default {
 }
 .playground-label {
   margin-top: 10px;
-  font-weight: bold;
+  label {
+    font-weight: bold;
+  }
+}
+.playground-length {
+  color: var(--light-text);
+  font-size: 14px;
+  vertical-align: mathematical;
+  strong {
+    color: var(--hljs-comment);
+    font-weight: normal;
+  }
 }
 .playground-input-container {
   background: var(--toolbar-background);
