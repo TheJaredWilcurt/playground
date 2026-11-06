@@ -9,7 +9,14 @@
           Input
         </label>
         <span class="playground-length">
-          (<strong>Length:</strong> {{ input.length.toLocaleString() }})
+          (<strong>Length:</strong>
+          {{ input.length.toLocaleString() }}<span
+            v-if="showGZip"
+            class="playground-gzip"
+          >
+            <strong>GZip:</strong>
+            {{ inputGZip }}
+          </span>)
         </span>
       </div>
       <CodeMirror
@@ -32,7 +39,7 @@
           (<strong>Length:</strong>
           {{ expected.length.toLocaleString() }}<span
             v-if="showGZip"
-            style="border-left: 1px solid currentcolor;margin: 0 0 0 0.5rem;padding:0 0 0 0.5rem;"
+            class="playground-gzip"
           >
             <strong>GZip:</strong>
             {{ expectedGZip }}
@@ -178,6 +185,7 @@ export default {
       showDiffs,
       showErrors: false,
       expectedGZip: 20,
+      inputGZip: 20,
       gZips: {},
       output: {},
       versions: {},
@@ -238,6 +246,9 @@ export default {
     setVersion: function (key, value) {
       this.versions[key] = value;
     },
+    setInputGzip: async function () {
+      this.inputGZip = await getGzippedSize(this.input);
+    },
     setExpectedGzip: async function () {
       this.expectedGZip = await getGzippedSize(this.expected);
     }
@@ -252,6 +263,7 @@ export default {
       this.setExpectedGzip();
     },
     input: function (value) {
+      this.setInputGzip();
       if (!value) {
         this.winners = [];
       }
@@ -266,6 +278,7 @@ export default {
   created: function () {
     this.initialize();
     this.loadUrlParams();
+    this.setInputGzip();
   }
 };
 </script>
@@ -300,6 +313,11 @@ export default {
     color: var(--hljs-comment);
     font-weight: normal;
   }
+}
+.playground-gzip {
+  border-left: 1px solid currentcolor;
+  margin: 0rem 0rem 0rem 0.5rem;
+  padding: 0rem 0rem 0rem 0.5rem;
 }
 .playground-input-container {
   background: var(--toolbar-background);
