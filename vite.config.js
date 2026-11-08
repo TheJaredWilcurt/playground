@@ -18,7 +18,10 @@ const config = defineConfig({
     target: 'baseline-widely-available'
   },
   optimizeDeps: {
-    exclude: ['css-declaration-sorter']
+    exclude: [
+      'css-declaration-sorter',
+      'csskit/bundler'
+    ]
   },
   plugins: [
     vue(),
