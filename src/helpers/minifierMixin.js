@@ -50,6 +50,9 @@ export default {
     }
   },
   computed: {
+    fullVersion: function () {
+      return '';
+    },
     time: function () {
       return formatMs(this.duration);
     },

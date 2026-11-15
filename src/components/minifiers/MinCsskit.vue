@@ -52,7 +52,7 @@ import { dependencies } from '../../../package.json' with { type: 'json' };
 import minifierMixin from '@/helpers/minifierMixin.js';
 
 const fullVersion = dependencies.csskit.replace('^', '');
-const version = fullVersion.split('-')[0];
+const version = fullVersion?.split('-')[0];
 
 export default {
   name: 'MinCsskit',
