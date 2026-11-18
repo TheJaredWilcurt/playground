@@ -108,7 +108,7 @@ export default {
 }
 .min-lightning-logo-text {
   color: transparent;
-  font-family: urbane-rounded;
+  font-family: urbane-rounded, sans-serif;
   font-size: 7.7px;
   font-weight: bold;
   letter-spacing: -.02em;
