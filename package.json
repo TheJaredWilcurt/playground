@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@stylistic/eslint-plugin": "^5.10.0",
+    "@stylistic/eslint-plugin": "^6.0.0",
     "@vitejs/plugin-vue": "^6.0.11",
     "cross-env": "^10.1.0",
     "eslint": "^10.15.0",
