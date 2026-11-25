@@ -20,10 +20,9 @@
     "@codemirror/autocomplete": "^6.20.4",
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-markdown": "^6.5.2",
-    "@codemirror/view": "^6.43.15",
     "@sarap422/font-dinish": "^1.0.6",
     "@shikijs/langs": "^4.6.0",
-    "@thejaredwilcurt/csslop": "^0.0.67",
+    "@thejaredwilcurt/csslop": "^0.0.68",
     "buffer": "^6.0.3",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
@@ -48,6 +47,7 @@
     "vue-options-api-constants-plugin": "^1.0.3"
   },
   "devDependencies": {
+    "@codemirror/view": "^6.44.0",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@vitejs/plugin-vue": "^6.0.11",
