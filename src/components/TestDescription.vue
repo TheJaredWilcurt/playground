@@ -58,6 +58,20 @@
       style="--default-height: calc(25px * 3)"
       @update:model-value="$emit('update:description', $event)"
     />
+    <div class="test-description-lint-errors">
+      <div v-if="descriptionRequiresTrim">
+        <strong>LINTER:</strong>
+        Line has trailing whitespace.
+      </div>
+      <div v-if="descriptionOverflows">
+        <strong>LINTER:</strong>
+        Line is longer than 80 characters.
+      </div>
+      <div v-if="descriptionMissingClosingGrave">
+        <strong>LINTER:</strong>
+        Missing closing grave (`).
+      </div>
+    </div>
   </form>
 </template>
 
@@ -146,6 +160,30 @@ export default {
       }
 
       return '# ' + title;
+    },
+    descriptionMissingClosingGrave: function () {
+      return ([...this.description.matchAll('`')].length % 2) !== 0;
+    },
+    descriptionLines: function () {
+      return this.description
+        .replaceAll('\r\n', '\n')
+        .replaceAll('\r', '\n')
+        .split('\n');
+    },
+    descriptionRequiresTrim: function () {
+      return this.descriptionLines
+        .slice(0, -1)
+        .filter((line) => {
+          return line.length !== line.trim().length;
+        })
+        .length;
+    },
+    descriptionOverflows: function () {
+      return this.descriptionLines
+        .filter((line) => {
+          return line.length > 80;
+        })
+        .length;
     }
   },
   watch: {
@@ -195,5 +233,9 @@ export default {
   background: var(--toolbar-background);
   border-radius: 0px 40px 40px;
   padding: 15px;
+}
+.test-description-lint-errors {
+  color: var(--hljs-tag);
+  padding: 8px 0px 0px 17px;
 }
 </style>
