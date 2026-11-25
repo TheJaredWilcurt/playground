@@ -1,11 +1,17 @@
 <template>
   <header>
     <div class="toolbar-logo-title">
-      <img
-        alt="CSS logo"
-        class="toolbar-logo"
-        src="/favicon.svg"
-      />
+      <a
+        href="/playground"
+        class="toolbar-logo-link"
+        title="Reset page"
+      >
+        <img
+          alt="CSS logo"
+          class="toolbar-logo"
+          src="/favicon.svg"
+        />
+      </a>
       <h1 class="toolbar-title">
         {{ APP_NAME }}
       </h1>
@@ -60,11 +66,14 @@ header {
   display: flex;
   align-items: center;
 }
+.toolbar-logo-link {
+  border-radius: 0px 8px 8px 8px;
+  margin: 5px 10px;
+}
 .toolbar-logo {
   display: block;
   width: 50px;
   height: 50px;
-  margin: 5px 10px;
 }
 .toolbar-title {
   margin: 0px;
