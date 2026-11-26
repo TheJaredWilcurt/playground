@@ -20,7 +20,7 @@
     "@codemirror/autocomplete": "^6.20.4",
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-markdown": "^6.5.2",
-    "@codemirror/view": "^6.44.0",
+    "@codemirror/view": "^6.44.1",
     "@sarap422/font-dinish": "^1.0.6",
     "@shikijs/langs": "^4.6.0",
     "@thejaredwilcurt/csslop": "^0.0.69",
@@ -62,7 +62,7 @@
     "eslint-plugin-vuejs-accessibility": "^2.6.3",
     "globals": "^17.14.0",
     "shiki": "^4.6.0",
-    "vite": "^8.3.8",
+    "vite": "^8.4.0",
     "vite-plugin-node-polyfills": "^0.28.0",
     "vite-plugin-vue-devtools": "^8.2.1"
   },
