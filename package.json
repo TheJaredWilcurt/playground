@@ -49,11 +49,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@stylistic/eslint-plugin": "^5.10.0",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "@vitejs/plugin-vue": "^6.0.11",
     "cross-env": "^10.1.0",
     "eslint": "^10.15.0",
-    "eslint-config-tjw-base": "^5.0.1",
+    "eslint-config-tjw-base": "^6.0.0",
     "eslint-config-tjw-import-x": "^1.0.2",
     "eslint-config-tjw-vue": "^4.0.2",
     "eslint-import-resolver-vite": "^2.2.0",
