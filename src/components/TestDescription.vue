@@ -61,7 +61,7 @@
     <div class="test-description-lint-errors">
       <div v-if="descriptionRequiresTrim">
         <strong>LINTER:</strong>
-        Line has trailing whitespace.
+        Line starts or ends with whitespace.
       </div>
       <div v-if="descriptionOverflows">
         <strong>LINTER:</strong>
