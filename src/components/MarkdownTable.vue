@@ -88,7 +88,15 @@ export default {
       type: String,
       default: ''
     },
+    alt1: {
+      type: String,
+      default: ''
+    },
     showExpected: {
+      type: Boolean,
+      default: false
+    },
+    showAlt1: {
       type: Boolean,
       default: false
     },
@@ -213,6 +221,10 @@ export default {
       if (this.showExpected) {
         const expected = this.wrapInCssCodeFence(this.expected);
         markdown.push(expected);
+      }
+      if (this.showAlt1) {
+        const alt1 = this.wrapInCssCodeFence(this.alt1);
+        markdown.push(alt1);
       }
       markdown.push(this.table);
       return markdown.join('\n\n');

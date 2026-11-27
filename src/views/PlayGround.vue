@@ -25,35 +25,35 @@
         class="playground-input-container"
         style="--default-height: 153px"
       />
-      <div class="playground-label">
-        <label
-          v-if="showExpected"
-          for="codemirror2"
-        >
-          Expected Output
-        </label>
-        <span
-          v-if="showExpected"
-          class="playground-length"
-        >
-          (<strong>Length:</strong>
-          {{ expected.length.toLocaleString() }}<span
-            v-if="showGZip"
-            class="playground-gzip"
-          >
-            <strong>GZip:</strong>
-            {{ expectedGZip }}
-          </span>)
-        </span>
-      </div>
-      <CodeMirror
+      <ExpectedInput
         v-if="showExpected"
-        v-model="expected"
-        id="codemirror2"
-        class="playground-input-container"
-        style="--default-height: 25px"
-        @update:model-value="setWinners"
-      />
+        label="Expected Output"
+        forId="codemirror2"
+        :showGZip="showGZip"
+        :expected="expected"
+        :expectedGZip="expectedGZip"
+        @setWinners="expected = $event;setWinners()"
+      >
+        <button
+          v-if="!showAlt1"
+          class="playground-stepper"
+          @click="showAlt1 = true;setWinners()"
+        >+</button>
+      </ExpectedInput>
+      <ExpectedInput
+        v-if="showExpected && showAlt1"
+        label="Also Accepted"
+        forId="codemirror3"
+        :showGZip="showGZip"
+        :expected="alt1"
+        :expectedGZip="alt1GZip"
+        @setWinners="alt1 = $event;setWinners()"
+      >
+        <button
+          class="playground-stepper"
+          @click="showAlt1 = false;setWinners()"
+        >-</button>
+      </ExpectedInput>
     </form>
 
     <table class="playground-table">
@@ -122,7 +122,9 @@
       :output="output"
       :versions="versions"
       :expected="expected"
+      :alt1="alt1"
       :showExpected="showExpected"
+      :showAlt1="showAlt1"
       :showTestDescription="showTestDescription"
       :testCategory="testCategory"
       :testTitle="testTitle"
@@ -153,8 +155,10 @@ const minifiers = {
 const {
   input,
   expected,
+  alt1,
   showDiffs,
   showExpected,
+  showAlt1,
   showGZip,
   showTestDescription,
   testCategory,
@@ -169,6 +173,7 @@ export default {
   components: {
     CheckBox: asyncify(() => import('@/components/CheckBox.vue')),
     CodeMirror: asyncify(() => import('@/components/CodeMirror.vue')),
+    ExpectedInput: asyncify(() => import('@/components/ExpectedInput.vue')),
     MarkdownTable: asyncify(() => import('@/components/MarkdownTable.vue')),
     TestDescription: asyncify(() => import('@/components/TestDescription.vue'))
   },
@@ -176,7 +181,9 @@ export default {
     return {
       input,
       expected,
+      alt1,
       showExpected,
+      showAlt1,
       showGZip,
       showTestDescription,
       testCategory,
@@ -185,6 +192,7 @@ export default {
       showDiffs,
       showErrors: false,
       expectedGZip: 20,
+      alt1GZip: 20,
       inputGZip: 20,
       gZips: {},
       output: {},
@@ -209,6 +217,9 @@ export default {
         for (const key in this.output) {
           if (this.showExpected) {
             if (this.expected.trim() === this.output[key]) {
+              this.winners.push(key);
+            }
+            if (this.showAlt1 && this.alt1.trim() === this.output[key]) {
               this.winners.push(key);
             }
           } else if (this.showGZip) {
@@ -251,6 +262,9 @@ export default {
     },
     setExpectedGzip: async function () {
       this.expectedGZip = await getGzippedSize(this.expected);
+    },
+    setAlt1Gzip: async function () {
+      this.alt1GZip = await getGzippedSize(this.alt1);
     }
   },
   computed: {
@@ -261,6 +275,9 @@ export default {
   watch: {
     expected: function () {
       this.setExpectedGzip();
+    },
+    alt1: function () {
+      this.setAlt1Gzip();
     },
     input: function (value) {
       this.setInputGzip();
@@ -323,6 +340,13 @@ export default {
   background: var(--toolbar-background);
   border-radius: 0px 40px 40px;
   padding: 15px;
+}
+.playground-stepper {
+  height: 16px;
+  border: 0px;
+  border-radius: 0px 8px 8px 8px;
+  padding: 0px 8px 0px 8px;
+  line-height: 10px;
 }
 .playground-table tr > :nth-child(2) {
   padding: 0px 0px 0px 5px;

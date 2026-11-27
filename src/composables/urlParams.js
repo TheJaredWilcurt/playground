@@ -23,8 +23,10 @@ const defaultInput = `
 export const useUrlParams = function () {
   const input = ref(defaultInput);
   const expected = ref('');
+  const alt1 = ref('');
   const showDiffs = ref(false);
   const showExpected = ref(false);
+  const showAlt1 = ref(false);
   const showGZip = ref(false);
   const showTestDescription = ref(false);
   const testCategory = ref('');
@@ -61,6 +63,11 @@ export const useUrlParams = function () {
     } else {
       url.searchParams.delete('x');
     }
+    if (showAlt1.value) {
+      url.searchParams.set('a1', urlEncode(alt1.value));
+    } else {
+      url.searchParams.delete('a1');
+    }
 
     if (showTestDescription.value) {
       if (encodedCategory > 0) {
@@ -83,6 +90,7 @@ export const useUrlParams = function () {
     const paramValue = url.searchParams.get('v');
     const paramInput = url.searchParams.get('i');
     const paramExpected = url.searchParams.get('e');
+    const paramAlt1 = url.searchParams.get('a1');
     const paramExpectation = url.searchParams.get('x');
     const paramCategoryIndex = url.searchParams.get('c');
     const paramTitle = url.searchParams.get('t');
@@ -101,6 +109,10 @@ export const useUrlParams = function () {
     } else if (typeof(paramExpectation) === 'string') {
       showExpected.value = true;
       expected.value = urlDecode(paramExpectation);
+    }
+    if (typeof(paramAlt1) === 'string') {
+      showAlt1.value = true;
+      alt1.value = urlDecode(paramAlt1);
     }
 
     if (typeof(paramCategoryIndex) === 'string') {
@@ -127,8 +139,10 @@ export const useUrlParams = function () {
   const stateToStoreInUrlParams = [
     input,
     expected,
+    alt1,
     showDiffs,
     showExpected,
+    showAlt1,
     showGZip,
     showTestDescription,
     testCategory,
@@ -142,8 +156,10 @@ export const useUrlParams = function () {
   return {
     input,
     expected,
+    alt1,
     showDiffs,
     showExpected,
+    showAlt1,
     showGZip,
     showTestDescription,
     testCategory,
