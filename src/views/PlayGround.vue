@@ -32,7 +32,7 @@
         :showGZip="showGZip"
         :expected="expected"
         :expectedGZip="expectedGZip"
-        @setWinners="expected = $event;setWinners()"
+        @set-winners="expected = $event;setWinners()"
       >
         <button
           v-if="!showAlt1"
@@ -47,7 +47,7 @@
         :showGZip="showGZip"
         :expected="alt1"
         :expectedGZip="alt1GZip"
-        @setWinners="alt1 = $event;setWinners()"
+        @set-winners="alt1 = $event;setWinners()"
       >
         <button
           class="playground-stepper"

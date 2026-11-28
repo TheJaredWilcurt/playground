@@ -17,12 +17,12 @@
         </span>
       </span>
       <span>
-        <slot></slot>
+        <slot />
       </span>
     </div>
     <CodeMirror
-      :model-value="expected"
       :id="forId"
+      :modelValue="expected"
       class="playground-input-container"
       style="--default-height: 25px"
       @update:model-value="$emit('setWinners', $event)"
@@ -36,7 +36,7 @@ import { asyncify } from '@/helpers/helpers.js';
 export default {
   name: 'ExpectedInput',
   components: {
-    CodeMirror: asyncify(() => import('@/components/CodeMirror.vue')),
+    CodeMirror: asyncify(() => import('@/components/CodeMirror.vue'))
   },
   props: {
     label: {
